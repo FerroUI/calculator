@@ -4,6 +4,14 @@ An initial native FerroUI port of [Microsoft Calculator](https://github.com/micr
 
 **Try it in the browser:** https://ferroui.github.io/calculator/
 
+<p>
+  <img src="docs/images/standard-light.png" width="280" alt="The Standard calculator in the light theme">
+  <img src="docs/images/standard-dark.png" width="280" alt="The Standard calculator in the dark theme">
+  <img src="docs/images/scientific-light.png" width="280" alt="The Scientific calculator showing sin(30) = 0.5">
+</p>
+
+The application window as rendered by the headless UI test with Skia (`FERRO_CALC_CAPTURE_DIR`).
+
 Standard, Scientific and Programmer calculators, history and multi-item memory, bit toggling, Gregorian date calculations, all twelve physical-unit categories and upstream's explicitly fictional currency rates work. This is a working core port, **not yet a claim of complete application or visual parity**. Session persistence, the full original shell/list interactions, all adaptive layouts, graph UI integration and effect fidelity still have open work.
 
 The running calculator uses the original CalculatorIcons.ttf and original keypad grids, names, command IDs and glyphs. Light/dark colours and native Reveal/Acrylic brush recipes come from App.xaml. The shell now uses FerroUI's native NavigationView and the window requests a Mica backdrop. Key hover/press uses native Reveal with platform policy fallbacks. The source's 1-DIP Reveal borders are retained, and the light spreads across the borders of neighbouring keys (MATERIAL-01, fixed in FerroUI). Five keypad documents are mechanically adapted and checked for reproducibility; the shell, calculator wrapper, date and converter views remain manual adaptations. The complete original XAML remains in the upstream submodule.
