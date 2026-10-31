@@ -5,7 +5,7 @@ Port policy: preserve the original Calculator source, reuse upstream FerroUI fea
 ## Audited revisions — 2026-10-31
 
 - Calculator: [`79e1ac53bba690cdf930e5dcd6ed9dbc4cbfb128`](https://github.com/microsoft/calculator/tree/79e1ac53bba690cdf930e5dcd6ed9dbc4cbfb128), the unmodified `upstream/calculator` submodule. All 775 original files, including the native C++ math engine, remain covered by the preservation manifest.
-- **FerroUI and application dependency:** [`703be74c`][main], the `FerroUI` submodule (path dependencies; the workspace blocks of Cargo.toml are kept in step by `FerroUI/scripts/apps/sync-workspace.py`). It includes both Reveal lighting fixes of MATERIAL-01 (FerroUI pull requests #435 and #445) and supersedes the earlier audit of `62b48431` and the 2026-10-23 audit of `61ad85c3`.
+- **FerroUI and application dependency:** [`5cab495e`][main], the `FerroUI` submodule (path dependencies; the workspace blocks of Cargo.toml are kept in step by `FerroUI/scripts/apps/sync-workspace.py`). It includes both Reveal lighting fixes of MATERIAL-01 (FerroUI pull requests #435 and #445) and supersedes the earlier audit of `62b48431` and the 2026-10-23 audit of `61ad85c3`.
 - Evidence: [materials implementation/deviations][materials], [composition inventory][composition], [native WinUI controls][controls], [Calculator compatibility plan][calculator-plan], and the linked implementation files. Several upstream planning/inventory tables and theme-deviation rows describe the pre-port state; current source registration and implemented-phase sections take precedence over those historical “missing” labels.
 - [XAML adaptation inventory](xaml-adaptations.json) records translated/deferred members and restored error-state groups. `python3 scripts/port_xaml.py --check` verifies reproducibility.
 
@@ -74,15 +74,15 @@ The previous statements that Reveal, AcrylicBrush, NavigationView, ThemeShadow, 
 Keep stable gap IDs. Record framework availability, application adoption and native visual/semantic verification separately. Link the exact upstream revision, and test supported platforms/backends before closing fidelity work. Source audits and local Skia captures do not certify Windows/WinUI pixel parity. Missing framework features remain upstream work; the Reveal fix is exported separately for upstream and the application uses native lighting.
 
 <!-- Immutable upstream evidence for the 2026-10-31 audit. -->
-[main]: https://github.com/wieslawsoltes/FerroUI/tree/703be74c50708c015256d2172d803f1eab01a2da
-[materials]: https://github.com/wieslawsoltes/FerroUI/blob/703be74c50708c015256d2172d803f1eab01a2da/docs/porting/winui-materials.md
-[composition]: https://github.com/wieslawsoltes/FerroUI/blob/703be74c50708c015256d2172d803f1eab01a2da/docs/porting/winui-composition.md
-[controls]: https://github.com/wieslawsoltes/FerroUI/blob/703be74c50708c015256d2172d803f1eab01a2da/docs/porting/winui-controls.md
-[calculator-plan]: https://github.com/wieslawsoltes/FerroUI/blob/703be74c50708c015256d2172d803f1eab01a2da/docs/porting/winui-calculator-gaps.md
-[reveal]: https://github.com/wieslawsoltes/FerroUI/blob/703be74c50708c015256d2172d803f1eab01a2da/src/FerroUI.Controls/media/reveal_brush.rs
-[acrylic]: https://github.com/wieslawsoltes/FerroUI/blob/703be74c50708c015256d2172d803f1eab01a2da/src/FerroUI.Base/media/acrylic_brush.rs
-[shape]: https://github.com/wieslawsoltes/FerroUI/blob/703be74c50708c015256d2172d803f1eab01a2da/src/FerroUI.Controls/shapes/shape.rs
-[theme-shadow]: https://github.com/wieslawsoltes/FerroUI/blob/703be74c50708c015256d2172d803f1eab01a2da/src/FerroUI.Base/media/theme_shadow.rs
-[navigation]: https://github.com/wieslawsoltes/FerroUI/blob/703be74c50708c015256d2172d803f1eab01a2da/src/FerroUI.Controls/navigation_view.rs
-[registered-controls]: https://github.com/wieslawsoltes/FerroUI/blob/703be74c50708c015256d2172d803f1eab01a2da/src/FerroUI.Controls/register_types.rs
+[main]: https://github.com/wieslawsoltes/FerroUI/tree/5cab495e73d0cf06fede9c1630f434771571b85f
+[materials]: https://github.com/wieslawsoltes/FerroUI/blob/5cab495e73d0cf06fede9c1630f434771571b85f/docs/porting/winui-materials.md
+[composition]: https://github.com/wieslawsoltes/FerroUI/blob/5cab495e73d0cf06fede9c1630f434771571b85f/docs/porting/winui-composition.md
+[controls]: https://github.com/wieslawsoltes/FerroUI/blob/5cab495e73d0cf06fede9c1630f434771571b85f/docs/porting/winui-controls.md
+[calculator-plan]: https://github.com/wieslawsoltes/FerroUI/blob/5cab495e73d0cf06fede9c1630f434771571b85f/docs/porting/winui-calculator-gaps.md
+[reveal]: https://github.com/wieslawsoltes/FerroUI/blob/5cab495e73d0cf06fede9c1630f434771571b85f/src/FerroUI.Controls/media/reveal_brush.rs
+[acrylic]: https://github.com/wieslawsoltes/FerroUI/blob/5cab495e73d0cf06fede9c1630f434771571b85f/src/FerroUI.Base/media/acrylic_brush.rs
+[shape]: https://github.com/wieslawsoltes/FerroUI/blob/5cab495e73d0cf06fede9c1630f434771571b85f/src/FerroUI.Controls/shapes/shape.rs
+[theme-shadow]: https://github.com/wieslawsoltes/FerroUI/blob/5cab495e73d0cf06fede9c1630f434771571b85f/src/FerroUI.Base/media/theme_shadow.rs
+[navigation]: https://github.com/wieslawsoltes/FerroUI/blob/5cab495e73d0cf06fede9c1630f434771571b85f/src/FerroUI.Controls/navigation_view.rs
+[registered-controls]: https://github.com/wieslawsoltes/FerroUI/blob/5cab495e73d0cf06fede9c1630f434771571b85f/src/FerroUI.Controls/register_types.rs
 [calculator-reveal-template]: https://github.com/microsoft/calculator/blob/6f49b17bf099c10830c15ea93e1207068896045b/src/Calculator/App.xaml#L142
