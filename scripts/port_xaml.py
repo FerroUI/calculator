@@ -98,6 +98,7 @@ def transform(e,file,path=''):
         if prop.startswith('AutomationProperties.') and prop!='AutomationProperties.Name' and prop!='AutomationProperties.AutomationId':
             record(file,path,'attribute',k+'='+v,gap='A11Y-01');continue
         if prop=='Text' and target=='Button':continue
+        if prop=='Glyph' and t=='OperatorPanelButton':continue
         if prop=='FontFamily' and 'CalculatorFontFamily' in v:
             out.set(prop,'fonts:Calculator#Calculator Fluent Icons');continue
         if prop in attrs or prop in ['AutomationProperties.Name','AutomationProperties.AutomationId']:
@@ -113,13 +114,22 @@ def transform(e,file,path=''):
                 record(file,path,'binding',k+'='+v,'Rust view update',gap='XAML-01');continue
             out.set(prop,v);continue
         record(file,path,'attribute',k+'='+v,gap='XAML-01')
-    # The panel's localized label is stored in a WinUI-specific plain property.
+    # The panel's localized label is stored in a WinUI-specific plain property. The content
+    # follows App.xaml's OperatorPanelButtonStyle template: the panel glyph, the label and the
+    # chevron (E70D), both glyphs from CalculatorIcons.
     if t=='OperatorPanelButton':
         for prop in ['Content','Text','Label']:
             value=e.attrib.get(prop,'')
             if value.startswith('{utils:ResourceString Name='):
                 value=strings.get(value[len('{utils:ResourceString Name='):-1].replace('/', '.'),'')
-            if value:out.set('Content',value+' ▾');break
+            if value:
+                panel=E.SubElement(out,'{'+F+'}StackPanel',{'Orientation':'Horizontal'})
+                icons='fonts:Calculator#Calculator Fluent Icons'
+                if e.attrib.get('Glyph'):
+                    E.SubElement(panel,'{'+F+'}FontIcon',{'Margin':'0,2,8,0','VerticalAlignment':'Center','FontFamily':icons,'Glyph':e.attrib['Glyph']})
+                E.SubElement(panel,'{'+F+'}TextBlock',{'VerticalAlignment':'Center','Text':value})
+                E.SubElement(panel,'{'+F+'}FontIcon',{'Margin':'8,4,0,0','VerticalAlignment':'Center','FontFamily':icons,'Glyph':'\ue70d'})
+                break
     for c in e:
         child=transform(c,file,path)
         if child is not None:out.append(child)

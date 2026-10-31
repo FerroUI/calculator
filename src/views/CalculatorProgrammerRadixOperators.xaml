@@ -47,7 +47,12 @@
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
         <StackPanel Orientation="Horizontal" Grid.ColumnSpan="6" AutomationProperties.Name="Programmer operator panels">
-            <Button Classes="calc caption" x:Name="BitwiseButton" AutomationProperties.AutomationId="bitwiseButton" AutomationProperties.Name="Bitwise" Content="Bitwise ▾">
+            <Button Classes="calc caption" x:Name="BitwiseButton" AutomationProperties.AutomationId="bitwiseButton" AutomationProperties.Name="Bitwise">
+                <StackPanel Orientation="Horizontal">
+                    <FontIcon Margin="0,2,8,0" VerticalAlignment="Center" FontFamily="fonts:Calculator#Calculator Fluent Icons" Glyph="" />
+                    <TextBlock VerticalAlignment="Center" Text="Bitwise" />
+                    <FontIcon Margin="8,4,0,0" VerticalAlignment="Center" FontFamily="fonts:Calculator#Calculator Fluent Icons" Glyph="" />
+                </StackPanel>
                 <Button.Flyout>
                     <Flyout>
                         <Grid x:Name="BitwiseGrid" MinWidth="258" MinHeight="96" FlowDirection="LeftToRight">
@@ -70,7 +75,12 @@
                     </Flyout>
                 </Button.Flyout>
             </Button>
-            <Button Classes="calc caption" x:Name="BitShiftButton" AutomationProperties.AutomationId="bitShiftButton" AutomationProperties.Name="Bitshift" Content="Bit shift ▾">
+            <Button Classes="calc caption" x:Name="BitShiftButton" AutomationProperties.AutomationId="bitShiftButton" AutomationProperties.Name="Bitshift">
+                <StackPanel Orientation="Horizontal">
+                    <FontIcon Margin="0,2,8,0" VerticalAlignment="Center" FontFamily="fonts:Calculator#Calculator Fluent Icons" Glyph="" />
+                    <TextBlock VerticalAlignment="Center" Text="Bit shift" />
+                    <FontIcon Margin="8,4,0,0" VerticalAlignment="Center" FontFamily="fonts:Calculator#Calculator Fluent Icons" Glyph="" />
+                </StackPanel>
                 <Button.Flyout>
                     <Flyout>
                         <Border Padding="12" MaxWidth="192">

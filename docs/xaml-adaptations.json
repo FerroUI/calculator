@@ -1249,14 +1249,6 @@
   },
   {
     "file": "CalculatorScientificOperators.xaml",
-    "element": "/ControlRoot/ScientificOperators/OperatorPanelListView/TrigButton",
-    "kind": "attribute",
-    "original": "Glyph=",
-    "replacement": null,
-    "gap": "XAML-01"
-  },
-  {
-    "file": "CalculatorScientificOperators.xaml",
     "element": "/ControlRoot/ScientificOperators/OperatorPanelListView/TrigButton/OperatorPanelButton.FlyoutMenu",
     "kind": "type",
     "original": "OperatorPanelButton.FlyoutMenu",
@@ -2742,14 +2734,6 @@
     "original": "{StaticResource OperatorPanelButtonStyle}",
     "replacement": "Classes=calc caption",
     "gap": "XAML-03"
-  },
-  {
-    "file": "CalculatorScientificOperators.xaml",
-    "element": "/ControlRoot/ScientificOperators/OperatorPanelListView/FuncButton",
-    "kind": "attribute",
-    "original": "Glyph=",
-    "replacement": null,
-    "gap": "XAML-01"
   },
   {
     "file": "CalculatorScientificOperators.xaml",
@@ -4529,14 +4513,6 @@
   },
   {
     "file": "CalculatorProgrammerRadixOperators.xaml",
-    "element": "/ControlRoot/ProgRadixOps/OperatorPanelListView/BitwiseButton",
-    "kind": "attribute",
-    "original": "Glyph=",
-    "replacement": null,
-    "gap": "XAML-01"
-  },
-  {
-    "file": "CalculatorProgrammerRadixOperators.xaml",
     "element": "/ControlRoot/ProgRadixOps/OperatorPanelListView/BitwiseButton/OperatorPanelButton.FlyoutMenu",
     "kind": "type",
     "original": "OperatorPanelButton.FlyoutMenu",
@@ -4982,14 +4958,6 @@
     "original": "{StaticResource OperatorPanelButtonStyle}",
     "replacement": "Classes=calc caption",
     "gap": "XAML-03"
-  },
-  {
-    "file": "CalculatorProgrammerRadixOperators.xaml",
-    "element": "/ControlRoot/ProgRadixOps/OperatorPanelListView/BitShiftButton",
-    "kind": "attribute",
-    "original": "Glyph=",
-    "replacement": null,
-    "gap": "XAML-01"
   },
   {
     "file": "CalculatorProgrammerRadixOperators.xaml",

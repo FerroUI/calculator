@@ -25,7 +25,7 @@
             <Button x:Name="MemoryAdd" Grid.Column="2" Classes="calc caption" Content="M+"/>
             <Button x:Name="MemorySubtract" Grid.Column="3" Classes="calc caption" Content="M−"/>
             <Button x:Name="MemoryStore" Grid.Column="4" Classes="calc caption" Content="MS"/>
-            <Button x:Name="MemoryShow" Grid.Column="5" Classes="calc caption" Content="M▾"/>
+            <Button x:Name="MemoryShow" Grid.Column="5" Classes="calc caption symbol" Content="&#xE61D;" AutomationProperties.Name="Memory" ToolTip.Tip="Memory"/>
         </Grid>
         <Grid Grid.Row="4">
             <ContentControl x:Name="OperatorsPanel" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>

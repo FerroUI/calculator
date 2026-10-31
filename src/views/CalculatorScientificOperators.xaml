@@ -71,7 +71,12 @@
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
         <StackPanel Orientation="Horizontal" Grid.ColumnSpan="5" AutomationProperties.Name="Scientific operator panels">
-            <Button Classes="calc caption" x:Name="TrigButton" AutomationProperties.AutomationId="trigButton" AutomationProperties.Name="Trigonometry" Content="Trigonometry ▾">
+            <Button Classes="calc caption" x:Name="TrigButton" AutomationProperties.AutomationId="trigButton" AutomationProperties.Name="Trigonometry">
+                <StackPanel Orientation="Horizontal">
+                    <FontIcon Margin="0,2,8,0" VerticalAlignment="Center" FontFamily="fonts:Calculator#Calculator Fluent Icons" Glyph="" />
+                    <TextBlock VerticalAlignment="Center" Text="Trigonometry" />
+                    <FontIcon Margin="8,4,0,0" VerticalAlignment="Center" FontFamily="fonts:Calculator#Calculator Fluent Icons" Glyph="" />
+                </StackPanel>
                 <Button.Flyout>
                     <Flyout>
                         <Grid x:Name="TrigGrid" MinWidth="258" MinHeight="96" FlowDirection="LeftToRight">
@@ -159,7 +164,12 @@
                     </Flyout>
                 </Button.Flyout>
             </Button>
-            <Button Classes="calc caption" x:Name="FuncButton" AutomationProperties.AutomationId="funcButton" AutomationProperties.Name="Functions" Content="Function ▾">
+            <Button Classes="calc caption" x:Name="FuncButton" AutomationProperties.AutomationId="funcButton" AutomationProperties.Name="Functions">
+                <StackPanel Orientation="Horizontal">
+                    <FontIcon Margin="0,2,8,0" VerticalAlignment="Center" FontFamily="fonts:Calculator#Calculator Fluent Icons" Glyph="" />
+                    <TextBlock VerticalAlignment="Center" Text="Function" />
+                    <FontIcon Margin="8,4,0,0" VerticalAlignment="Center" FontFamily="fonts:Calculator#Calculator Fluent Icons" Glyph="" />
+                </StackPanel>
                 <Button.Flyout>
                     <Flyout>
                         <Grid x:Name="FuncGrid" MinWidth="194" MinHeight="96" FlowDirection="LeftToRight">

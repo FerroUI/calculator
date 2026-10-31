@@ -10,7 +10,7 @@
     <Grid Margin="48,4,8,0" ColumnDefinitions="*,Auto,Auto" MinHeight="40">
         <TextBlock x:Name="Header" Text="Standard" FontSize="24" FontWeight="SemiBold" VerticalAlignment="Center" Margin="8,0"/>
         <Button x:Name="HistoryButton" Grid.Column="1" Classes="calc caption" Content="History"/>
-        <Button x:Name="ThemeButton" Grid.Column="2" Classes="calc caption" Content="◐" AutomationProperties.Name="Toggle light and dark theme"/>
+        <Button x:Name="ThemeButton" Grid.Column="2" Classes="calc caption symbol" Content="&#xE790;" AutomationProperties.Name="Toggle light and dark theme" ToolTip.Tip="Toggle light and dark theme"/>
     </Grid>
     <Grid Grid.Row="1" ColumnDefinitions="*,Auto">
         <ContentControl x:Name="ContentFrame" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>
