@@ -1,0 +1,25 @@
+<!-- UnitConverter.xaml: original from/to, selectors and NumberPad; platform bindings are supplied by Rust. -->
+<UserControl xmlns="https://github.com/ferroui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid RowDefinitions="Auto,Auto,Auto,*,Auto" Margin="12,8">
+        <StackPanel Spacing="8">
+            <TextBlock x:Name="Value1" Text="0" FontSize="36" FontWeight="SemiBold" TextWrapping="Wrap"/>
+            <ComboBox x:Name="Unit1" HorizontalAlignment="Left" MinWidth="200"/>
+        </StackPanel>
+        <Button x:Name="SwapUnits" Grid.Row="1" Content="⇅" Classes="calc caption" HorizontalAlignment="Left" AutomationProperties.Name="Switch conversion direction"/>
+        <StackPanel Grid.Row="2" Spacing="8">
+            <TextBlock x:Name="Value2" Text="0" FontSize="36" FontWeight="SemiBold" TextWrapping="Wrap"/>
+            <ComboBox x:Name="Unit2" HorizontalAlignment="Left" MinWidth="200"/>
+            <TextBlock x:Name="SupplementaryResults" FontSize="14" TextWrapping="Wrap" Margin="0,12"/>
+        </StackPanel>
+        <Grid Grid.Row="3" RowDefinitions="Auto,*" MaxWidth="480" HorizontalAlignment="Right" MinWidth="260">
+            <Grid ColumnDefinitions="*,*,*">
+                <Button x:Name="ConverterNegate" Classes="calc" Content="+/−"/>
+                <Button x:Name="ClearEntryButton" Grid.Column="1" Classes="calc" Content="CE"/>
+                <Button x:Name="BackSpaceButton" Grid.Column="2" Classes="calc" Content="⌫"/>
+            </Grid>
+            <ContentControl x:Name="NumberPad" Grid.Row="1" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>
+        </Grid>
+        <TextBlock x:Name="CurrencyNotice" Grid.Row="4" IsVisible="False" Margin="0,12,0,0" TextWrapping="Wrap"
+                   Text="Upstream developer mock currencies. These fictional rates are static and are not real exchange rates."/>
+    </Grid>
+</UserControl>

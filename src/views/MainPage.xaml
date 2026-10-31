@@ -1,0 +1,30 @@
+<!-- MainPage.xaml's NavigationView contract: LeftMinimal and settings in the footer.
+     Original Header and content/history names are retained. -->
+<Grid xmlns="https://github.com/ferroui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      x:Name="RootLayout">
+    <NavigationView x:Name="NavView" PaneDisplayMode="LeftMinimal"
+                    IsBackButtonVisible="Collapsed" IsSettingsVisible="True"
+                    IsPaneOpen="False" OpenPaneLength="284"
+                    CompactModeThresholdWidth="Infinity" ExpandedModeThresholdWidth="Infinity">
+    <Grid RowDefinitions="Auto,*">
+    <Grid Margin="48,4,8,0" ColumnDefinitions="*,Auto,Auto" MinHeight="40">
+        <TextBlock x:Name="Header" Text="Standard" FontSize="24" FontWeight="SemiBold" VerticalAlignment="Center" Margin="8,0"/>
+        <Button x:Name="HistoryButton" Grid.Column="1" Classes="calc caption" Content="History"/>
+        <Button x:Name="ThemeButton" Grid.Column="2" Classes="calc caption" Content="◐" AutomationProperties.Name="Toggle light and dark theme"/>
+    </Grid>
+    <Grid Grid.Row="1" ColumnDefinitions="*,Auto">
+        <ContentControl x:Name="ContentFrame" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>
+        <Border x:Name="HistoryPane" Grid.Column="1" Width="280" Padding="12,0,12,12" IsVisible="False">
+            <Grid RowDefinitions="Auto,*,Auto">
+                <Grid ColumnDefinitions="*,*" Margin="0,0,0,12">
+                    <Button x:Name="HistoryTab" Classes="calc caption" Content="History"/>
+                    <Button x:Name="MemoryTab" Grid.Column="1" Classes="calc caption" Content="Memory"/>
+                </Grid>
+                <ScrollViewer Grid.Row="1"><StackPanel x:Name="HistoryItems" Spacing="8"/></ScrollViewer>
+                <Button x:Name="ClearHistoryMemory" Grid.Row="2" Classes="calc caption" Content="Clear all" HorizontalAlignment="Right"/>
+            </Grid>
+        </Border>
+    </Grid>
+    </Grid>
+    </NavigationView>
+</Grid>

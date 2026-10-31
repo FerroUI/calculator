@@ -1,0 +1,259 @@
+From a22094a4c487ee1b43d62e21e41b998c0f2176f2 Mon Sep 17 00:00:00 2001
+From: Wieslaw Soltes <wieslawsoltes@users.noreply.github.com>
+Date: Sat, 31 Oct 2026 13:20:08 +0000
+Subject: [PATCH] Fix composition light discovery across rendering threads
+
+Native rendering can alternate between synchronous UI-thread frames and
+render-thread frames under the compositor lock. A thread-local light
+registry makes lights created on one thread invisible to the other.
+
+Keep weak light registrations on ServerCompositor and use the owning
+compositor for scene-lighting brushes, targeted light maps and moved
+coordinate-space invalidation.
+
+Add cross-thread regressions for XAML scene lights and explicitly targeted
+composition lights. The scene-light regression fails before this fix.
+All 97 composition tests pass after the change.
+---
+ .../composition_winui_lighting_tests.rs       | 58 +++++++++++++++++
+ .../server/server_composition_light.rs        | 64 ++++---------------
+ .../composition/server/server_compositor.rs   | 20 +++++-
+ 3 files changed, 86 insertions(+), 56 deletions(-)
+
+diff --git a/src/FerroUI.Base/rendering/composition/composition_winui_lighting_tests.rs b/src/FerroUI.Base/rendering/composition/composition_winui_lighting_tests.rs
+index 9586afbc..8f40efd2 100644
+--- a/src/FerroUI.Base/rendering/composition/composition_winui_lighting_tests.rs
++++ b/src/FerroUI.Base/rendering/composition/composition_winui_lighting_tests.rs
+@@ -63,6 +63,64 @@ fn sprite(s: &CompositorCanvas, width: f64, height: f64, brush: Option<Rc<Compos
+ 
+ // --- COMPOSITION-01: lighting ----------------------------------------------------------
+ 
++#[test]
++fn scene_lights_remain_available_when_the_server_renders_on_another_thread() {
++    use crate::rendering::composition::server::{scene_light_map, ServerCompositionVisual};
++
++    let s = CompositorCanvas::new();
++    let lit = sprite(&s, 30.0, 20.0, color_brush(&s, Colors::BLUE));
++    let light = s.compositor.create_ambient_light();
++    light.set_xaml_binding(Some("reveal-test".to_owned()), Some((*lit).clone()));
++    show(&s, &lit);
++
++    let visual_id = lit.server();
++    let server = s.compositor.locked_server();
++    let has_light = move |server: &Rc<crate::rendering::composition::server::ServerCompositor>| {
++        let visual = server
++            .get_object(visual_id)
++            .unwrap()
++            .into_any_rc()
++            .downcast::<ServerCompositionVisual>()
++            .ok()
++            .unwrap();
++        !scene_light_map(&visual, &["reveal-test".to_owned()]).is_empty()
++    };
++    assert!(server.with(&has_light), "the creating thread sees the light");
++    assert!(
++        std::thread::spawn(move || server.with(has_light)).join().unwrap(),
++        "native render-thread frames must see lights created during a synchronous UI-thread frame"
++    );
++}
++
++#[test]
++fn targeted_lights_remain_available_when_the_server_renders_on_another_thread() {
++    use crate::rendering::composition::server::{light_map_of, ServerCompositionVisual};
++
++    let s = CompositorCanvas::new();
++    let lit = sprite(&s, 30.0, 20.0, color_brush(&s, Colors::BLUE));
++    let light = s.compositor.create_ambient_light();
++    light.targets().add((*lit).clone());
++    show(&s, &lit);
++
++    let visual_id = lit.server();
++    let server = s.compositor.locked_server();
++    assert!(
++        std::thread::spawn(move || server.with(|server| {
++            let visual = server
++                .get_object(visual_id)
++                .unwrap()
++                .into_any_rc()
++                .downcast::<ServerCompositionVisual>()
++                .ok()
++                .unwrap();
++            light_map_of(&visual).is_some()
++        }))
++        .join()
++        .unwrap(),
++        "targeted composition lights must follow the server compositor across threads"
++    );
++}
++
+ #[test]
+ fn lit_content_is_drawn_in_a_multiply_layer_of_the_light_map() {
+     let s = CompositorCanvas::new();
+diff --git a/src/FerroUI.Base/rendering/composition/server/server_composition_light.rs b/src/FerroUI.Base/rendering/composition/server/server_composition_light.rs
+index 78566f4d..49c6ee39 100644
+--- a/src/FerroUI.Base/rendering/composition/server/server_composition_light.rs
++++ b/src/FerroUI.Base/rendering/composition/server/server_composition_light.rs
+@@ -657,51 +657,6 @@ pub trait IServerCompositionLight {
+     }
+ }
+ 
+-crate::ferro_thread_local! {
+-    /// The server-side lights of this (render) thread: what the render walk
+-    /// asks which lights reach a visual.
+-    static LIGHTS: RefCell<Vec<Weak<dyn IServerCompositionLight>>> = RefCell::new(Vec::new());
+-}
+-
+-fn register_light(light: Weak<dyn IServerCompositionLight>) {
+-    LIGHTS.with(|lights| {
+-        let mut lights = lights.borrow_mut();
+-        lights.retain(|light| light.strong_count() > 0);
+-        lights.push(light);
+-    });
+-}
+-
+-/// The lights of this thread that are alive, not disposed and enabled.
+-fn enabled_lights() -> Vec<Rc<dyn IServerCompositionLight>> {
+-    LIGHTS
+-        .try_with(|lights| {
+-            lights.try_borrow().map_or_else(
+-                |_| Vec::new(),
+-                |lights| {
+-                    lights
+-                        .iter()
+-                        .filter_map(Weak::upgrade)
+-                        .filter(|light| !light.is_disposed() && light.light_props().is_enabled())
+-                        .collect()
+-                },
+-            )
+-        })
+-        .unwrap_or_default()
+-}
+-
+-/// The lights of this thread that are alive and not disposed, enabled or
+-/// not.
+-fn live_lights() -> Vec<Rc<dyn IServerCompositionLight>> {
+-    LIGHTS
+-        .try_with(|lights| {
+-            lights.try_borrow().map_or_else(
+-                |_| Vec::new(),
+-                |lights| lights.iter().filter_map(Weak::upgrade).filter(|light| !light.is_disposed()).collect(),
+-            )
+-        })
+-        .unwrap_or_default()
+-}
+-
+ /// The transform from the coordinates of `visual` to those of the root of
+ /// its tree: its own transform and those of its ancestors.
+ fn to_root(visual: &ServerCompositionVisual) -> Matrix {
+@@ -724,7 +679,7 @@ fn to_root(visual: &ServerCompositionVisual) -> Matrix {
+ /// The lights that reach `visual`, as a light map in the coordinates of the
+ /// visual; `None` when no enabled light reaches it.
+ pub fn light_map_of(visual: &ServerCompositionVisual) -> Option<LightMap> {
+-    let lights = enabled_lights();
++    let lights: Vec<_> = visual.compositor()?.live_lights().into_iter().filter(|light| light.light_props().is_enabled()).collect();
+     if lights.is_empty() {
+         return None;
+     }
+@@ -746,9 +701,9 @@ pub fn light_map_of(visual: &ServerCompositionVisual) -> Option<LightMap> {
+ /// position of such a light moved with its space. Called by the composition
+ /// targets after their update; returns whether a light drew something
+ /// again, so the target collects the dirty areas once more.
+-pub fn invalidate_lights_with_moved_spaces() -> bool {
++pub fn invalidate_lights_with_moved_spaces(compositor: &ServerCompositor) -> bool {
+     let mut invalidated = false;
+-    for light in live_lights() {
++    for light in compositor.live_lights() {
+         let current = light.coordinate_space().map(|space| to_root(&space));
+         let state = light.light_state();
+         let previous = state.space_transform.replace(current);
+@@ -820,7 +775,9 @@ impl ServerLightState {
+         let observer: Rc<dyn IServerRenderResourceObserver> = Rc::new(LightObserver { light: light.clone() });
+         base.core().add_observer(&observer);
+         *state.observer.borrow_mut() = Some(observer);
+-        register_light(light);
++        if let Some(compositor) = base.object().compositor() {
++            compositor.register_light(light);
++        }
+     }
+ 
+     /// The id of the XAML light and the visual of the element that holds
+@@ -919,9 +876,9 @@ macro_rules! server_light {
+         }
+ 
+         impl $name {
+-            /// Creates the light, active and registered with the lights of
+-            /// the thread: the UI-thread light activates its server object
+-            /// when it is created.
++            /// Creates the light, active and registered with its compositor:
++            /// the UI-thread light activates its server object when it is
++            /// created.
+             pub fn new(compositor: &Rc<ServerCompositor>) -> Rc<$name> {
+                 let light = Rc::new_cyclic(|this: &Weak<$name>| $name {
+                     base: ServerRenderResource::new(
+@@ -1240,7 +1197,8 @@ impl LightMap {
+ pub fn scene_light_map(visual: &Rc<ServerCompositionVisual>, brush_light_ids: &[String]) -> LightMap {
+     let mut map = LightMap::new();
+     let mut visual_to_root: Option<Matrix> = None;
+-    for light in live_lights() {
++    let Some(compositor) = visual.compositor() else { return map };
++    for light in compositor.live_lights() {
+         let space = if let Some(target) = light.target_of(visual) {
+             light.coordinate_space().unwrap_or(target)
+         } else if let Some((id, Some(scope))) = light.light_state().xaml_binding() {
+diff --git a/src/FerroUI.Base/rendering/composition/server/server_compositor.rs b/src/FerroUI.Base/rendering/composition/server/server_compositor.rs
+index bfc0eca6..c407bdfa 100644
+--- a/src/FerroUI.Base/rendering/composition/server/server_compositor.rs
++++ b/src/FerroUI.Base/rendering/composition/server/server_compositor.rs
+@@ -1,6 +1,6 @@
+ use super::{
+-    CompositorPools, IServerObject, IServerRenderResource, ReadbackIndices, ServerCompositionTarget,
+-    ServerCompositionVisual, ServerCompositorAnimations, ServerObjectId,
++    CompositorPools, IServerCompositionLight, IServerObject, IServerRenderResource, ReadbackIndices,
++    ServerCompositionTarget, ServerCompositionVisual, ServerCompositorAnimations, ServerObjectId,
+ };
+ use crate::platform::surfaces::IPlatformRenderSurface;
+ use crate::platform::{IBitmapImpl, IPlatformGraphics, IRenderTarget, LtrbRect};
+@@ -125,6 +125,9 @@ pub struct ServerCompositor {
+     adorner_update_queue: RefCell<VecDeque<Rc<ServerCompositionVisual>>>,
+     /// The visual surfaces of the compositor, for their live updates.
+     visual_surfaces: RefCell<Vec<Weak<super::ServerCompositionVisualSurface>>>,
++    // Synchronous UI-thread frames and render-thread frames share this graph
++    // under its lock. Lights must follow the graph, rather than a thread.
++    lights: RefCell<Vec<Weak<dyn IServerCompositionLight>>>,
+     active_targets: RefCell<Vec<Rc<ServerCompositionTarget>>>,
+     pools: CompositorPools,
+     animations: ServerCompositorAnimations,
+@@ -137,6 +140,16 @@ pub struct ServerCompositor {
+ }
+ 
+ impl ServerCompositor {
++    pub(super) fn register_light(&self, light: Weak<dyn IServerCompositionLight>) {
++        let mut lights = self.lights.borrow_mut();
++        lights.retain(|light| light.strong_count() > 0);
++        lights.push(light);
++    }
++
++    pub(super) fn live_lights(&self) -> Vec<Rc<dyn IServerCompositionLight>> {
++        self.lights.borrow().iter().filter_map(Weak::upgrade).filter(|light| !light.is_disposed()).collect()
++    }
++
+     /// Creates the server compositor on the thread that renders. The queue of
+     /// batches and the readback are what it shares with its compositor, which
+     /// creates them.
+@@ -171,6 +184,7 @@ impl ServerCompositor {
+             visual_readback_update_pass_queue: RefCell::new(VecDeque::new()),
+             adorner_update_queue: RefCell::new(VecDeque::new()),
+             visual_surfaces: RefCell::new(Vec::new()),
++            lights: RefCell::new(Vec::new()),
+             active_targets: RefCell::new(Vec::new()),
+             pools: CompositorPools::default(),
+             animations: ServerCompositorAnimations::new(),
+@@ -758,7 +772,7 @@ impl ServerCompositor {
+         // A light whose coordinate space moved in this pass draws what it
+         // lights again (winui-materials.md): the content it invalidates is
+         // recomputed in a second pass.
+-        if super::invalidate_lights_with_moved_spaces() {
++        if super::invalidate_lights_with_moved_spaces(self) {
+             self.visual_own_properties_update_pass();
+         }
+         // Adorners need to be updated after own properties recompute pass,

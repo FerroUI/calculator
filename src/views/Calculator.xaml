@@ -1,0 +1,35 @@
+<!-- Calculator.xaml composition: preserve named sections, using native controls in place of WinRT custom controls. -->
+<UserControl xmlns="https://github.com/ferroui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid x:Name="CalculatorRoot" RowDefinitions="Auto,Auto,Auto,Auto,*" Margin="2,0,2,2">
+        <Grid x:Name="DisplayPanel" RowDefinitions="Auto,Auto" Margin="12,8,12,12">
+            <TextBlock x:Name="ExpressionDisplay" HorizontalAlignment="Right" MinHeight="24" FontSize="14"
+                       Foreground="{DynamicResource TextFillColorSecondaryBrush}" TextWrapping="Wrap"/>
+            <Viewbox Grid.Row="1" Stretch="Uniform" StretchDirection="DownOnly" HorizontalAlignment="Right" Height="64">
+                <TextBlock x:Name="CalculatorResults" Text="0" FontSize="48" FontWeight="SemiBold"
+                           AutomationProperties.Name="Result"/>
+            </Viewbox>
+        </Grid>
+        <ContentControl x:Name="ScientificAngleHost" Grid.Row="1" HorizontalContentAlignment="Stretch"/>
+        <StackPanel x:Name="ProgrammerPanel" Grid.Row="2" IsVisible="False" Margin="4,0">
+            <!-- Original RadixButton derives RadioButton. The entire value row
+                 is selectable; its label occupies the same 48-DIP column. -->
+            <RadioButton x:Name="HexButton" Classes="radix" GroupName="BaseConversion" Tag="HEX" Content="0" AutomationProperties.Name="Hexadecimal"/>
+            <RadioButton x:Name="DecimalButton" Classes="radix" GroupName="BaseConversion" Tag="DEC" Content="0" IsChecked="True" AutomationProperties.Name="Decimal"/>
+            <RadioButton x:Name="OctButton" Classes="radix" GroupName="BaseConversion" Tag="OCT" Content="0" AutomationProperties.Name="Octal"/>
+            <RadioButton x:Name="BinaryButton" Classes="radix" GroupName="BaseConversion" Tag="BIN" Content="0" AutomationProperties.Name="Binary"/>
+            <Grid ColumnDefinitions="Auto,*"><Button x:Name="WordSizeButton" Classes="calc caption" Content="QWORD"/><Button x:Name="BitFlip" Grid.Column="1" Classes="calc caption" Content="Bit toggling" HorizontalAlignment="Left"/></Grid>
+        </StackPanel>
+        <Grid x:Name="MemoryPanel" Grid.Row="3" ColumnDefinitions="*,*,*,*,*,*" Margin="0,0,0,4">
+            <Button x:Name="MemoryClear" Classes="calc caption" Content="MC"/>
+            <Button x:Name="MemoryRecall" Grid.Column="1" Classes="calc caption" Content="MR"/>
+            <Button x:Name="MemoryAdd" Grid.Column="2" Classes="calc caption" Content="M+"/>
+            <Button x:Name="MemorySubtract" Grid.Column="3" Classes="calc caption" Content="M−"/>
+            <Button x:Name="MemoryStore" Grid.Column="4" Classes="calc caption" Content="MS"/>
+            <Button x:Name="MemoryShow" Grid.Column="5" Classes="calc caption" Content="M▾"/>
+        </Grid>
+        <Grid Grid.Row="4">
+            <ContentControl x:Name="OperatorsPanel" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>
+            <ScrollViewer x:Name="BitFlipPanel" IsVisible="False"><UniformGrid x:Name="BitButtons" Columns="8"/></ScrollViewer>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,3 @@
+[submodule "upstream/calculator"]
+	path = upstream/calculator
+	url = https://github.com/microsoft/calculator.git

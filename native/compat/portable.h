@@ -1,0 +1,24 @@
+// Platform includes only. The upstream arithmetic sources are compiled unchanged.
+#pragma once
+#include <algorithm>
+#include <array>
+#include <cassert>
+#include <cstdint>
+#include <climits>
+#include <cmath>
+#include <cwctype>
+#include <functional>
+#include <iomanip>
+#include <limits>
+#include <list>
+#include <memory>
+#include <regex>
+#include <sstream>
+#include <stdexcept>
+#include <string>
+#include <string_view>
+#include <tuple>
+#include <unordered_map>
+#include <vector>
+#include "sal_cross_platform.h"
+#include "winerror_cross_platform.h"

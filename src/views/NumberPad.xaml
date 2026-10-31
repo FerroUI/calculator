@@ -1,0 +1,37 @@
+<!-- Adapted from upstream/calculator/src/Calculator/Views/NumberPad.xaml; see docs/xaml-adaptations.json. -->
+<UserControl xmlns="https://github.com/ferroui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="ControlRoot">
+    <Grid x:Name="Root">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="ErrorVisualStates">
+                <VisualState x:Name="NoErrorLayout" />
+                <VisualState x:Name="ErrorLayout">
+                    <VisualState.Setters>
+                        <Setter Target="DecimalSeparatorButton.IsEnabled" Value="false" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <Button Classes="calc numeric" Tag="Zero" Content="0" x:Name="Num0Button" Grid.Row="3" Grid.Column="1" AutomationProperties.AutomationId="num0Button" AutomationProperties.Name="Zero" />
+        <Button Classes="calc numeric" Tag="One" Content="1" x:Name="Num1Button" Grid.Row="2" AutomationProperties.AutomationId="num1Button" AutomationProperties.Name="One" />
+        <Button Classes="calc numeric" Tag="Two" Content="2" x:Name="Num2Button" Grid.Row="2" Grid.Column="1" AutomationProperties.AutomationId="num2Button" AutomationProperties.Name="Two" />
+        <Button Classes="calc numeric" Tag="Three" Content="3" x:Name="Num3Button" Grid.Row="2" Grid.Column="2" AutomationProperties.AutomationId="num3Button" AutomationProperties.Name="Three" />
+        <Button Classes="calc numeric" Tag="Four" Content="4" x:Name="Num4Button" Grid.Row="1" AutomationProperties.AutomationId="num4Button" AutomationProperties.Name="Four" />
+        <Button Classes="calc numeric" Tag="Five" Content="5" x:Name="Num5Button" Grid.Row="1" Grid.Column="1" AutomationProperties.AutomationId="num5Button" AutomationProperties.Name="Five" />
+        <Button Classes="calc numeric" Tag="Six" Content="6" x:Name="Num6Button" Grid.Row="1" Grid.Column="2" AutomationProperties.AutomationId="num6Button" AutomationProperties.Name="Six" />
+        <Button Classes="calc numeric" Tag="Seven" Content="7" x:Name="Num7Button" AutomationProperties.AutomationId="num7Button" AutomationProperties.Name="Seven" />
+        <Button Classes="calc numeric" Tag="Eight" Content="8" x:Name="Num8Button" Grid.Column="1" AutomationProperties.AutomationId="num8Button" AutomationProperties.Name="Eight" />
+        <Button Classes="calc numeric" Tag="Nine" Content="9" x:Name="Num9Button" Grid.Column="2" AutomationProperties.AutomationId="num9Button" AutomationProperties.Name="Nine" />
+        <Button Classes="calc numeric" Tag="Decimal" Content="." x:Name="DecimalSeparatorButton" Grid.Row="3" Grid.Column="2" AutomationProperties.AutomationId="decimalSeparatorButton" AutomationProperties.Name="Decimal separator" />
+    </Grid>
+</UserControl>

@@ -1,0 +1,167 @@
+<!-- Reveal template structure from microsoft/calculator App.xaml, 6f49b17b
+     (2019 Fluent UI): RootGrid switches to a Reveal background on hover/press;
+     ContentPresenter draws a 1-DIP Reveal border, including on unhovered keys.
+     A Border replaces the source Grid so modern ControlCornerRadius clips its
+     background too. Default fills, rounded corners and engine/keypad source use
+     the modern revision; the native Reveal behavior comes from the older style. -->
+<Styles xmlns="https://github.com/ferroui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style Selector="Button.calc">
+        <Setter Property="Margin" Value="1"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="MinHeight" Value="12"/>
+        <Setter Property="MinWidth" Value="24"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AppControlForegroundTransparentRevealBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Background" Value="{DynamicResource CalcButtonAltFillColorDefaultBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource CalcButtonTextFillColorDefaultBrush}"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="RootGrid" Background="{TemplateBinding Background}"
+                        CornerRadius="{TemplateBinding CornerRadius}">
+                    <ContentPresenter Name="PART_ContentPresenter" Content="{TemplateBinding Content}"
+                                      ContentTemplate="{TemplateBinding ContentTemplate}"
+                                      BorderBrush="{TemplateBinding BorderBrush}"
+                                      BorderThickness="{TemplateBinding BorderThickness}"
+                                      CornerRadius="{TemplateBinding CornerRadius}"
+                                      Foreground="{TemplateBinding Foreground}"
+                                      Padding="{TemplateBinding Padding}"
+                                      HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+    <Style Selector="Button.calc:pointerover /template/ Border#RootGrid">
+        <Setter Property="RevealBrush.State" Value="PointerOver"/>
+        <Setter Property="Background" Value="{DynamicResource AppControlHoverButtonFaceBrush}"/>
+    </Style>
+    <Style Selector="Button.calc:pressed /template/ Border#RootGrid">
+        <Setter Property="RevealBrush.State" Value="Pressed"/>
+        <Setter Property="Background" Value="{DynamicResource AppControlPressedButtonFaceBrush}"/>
+    </Style>
+    <Style Selector="Button.calc:disabled /template/ Border#RootGrid">
+        <Setter Property="RevealBrush.State" Value="Normal"/>
+    </Style>
+    <Style Selector="Button.calc:disabled /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="BorderThickness" Value="0"/>
+    </Style>
+    <Style Selector="Button.calc.numeric">
+        <Setter Property="Background" Value="{DynamicResource CalcButtonFillColorDefaultBrush}"/>
+        <Setter Property="FontSize" Value="24"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+    </Style>
+    <Style Selector="Button.calc.symbol">
+        <Setter Property="FontFamily" Value="fonts:Calculator#Calculator Fluent Icons"/>
+    </Style>
+    <Style Selector="Button.calc.caption">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="MinHeight" Value="36"/>
+        <Setter Property="Padding" Value="12,0"/>
+    </Style>
+    <Style Selector="Button.calc:pointerover">
+        <Setter Property="Foreground" Value="{DynamicResource CalcButtonTextFillColorHoverBrush}"/>
+    </Style>
+    <Style Selector="Button.calc:pressed">
+        <Setter Property="Foreground" Value="{DynamicResource CalcButtonTextFillColorPressedBrush}"/>
+    </Style>
+    <Style Selector="Button.calc.equals">
+        <Setter Property="Background" Value="{DynamicResource AccentFillColorDefaultBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextOnAccentFillColorPrimaryBrush}"/>
+    </Style>
+    <Style Selector="Button.calc.equals:pointerover /template/ Border#RootGrid">
+        <Setter Property="Background" Value="{DynamicResource AppControlHighlightAccentRevealBackgroundBrush}"/>
+    </Style>
+    <Style Selector="Button.calc.equals:pressed /template/ Border#RootGrid">
+        <Setter Property="Background" Value="{DynamicResource AppControlBackgroundListAccentHighRevealBackgroundBrush}"/>
+    </Style>
+    <Style Selector="Button.calc:disabled">
+        <Setter Property="Opacity" Value="0.4"/>
+    </Style>
+    <Style Selector="ToggleButton.calc">
+        <Setter Property="Margin" Value="2"/>
+        <Setter Property="MinHeight" Value="34"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+    </Style>
+    <!-- CalculatorProgrammerOperators.xaml: ProgModeRadioButtonStyle, separate
+         from CalcButtonStyle. Existing system Reveal keys supply the SDK's
+         ListViewItemRevealBackground/BorderBrush aliases. -->
+    <Style Selector="RadioButton.radix">
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource SubtleFillColorTransparentBrush}"/>
+        <Setter Property="MinWidth" Value="280"/>
+        <Setter Property="MinHeight" Value="36"/>
+        <Setter Property="MaxHeight" Value="60"/>
+        <Setter Property="Padding" Value="8,0,0,0"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="ControlRoot" Background="{TemplateBinding Background}"
+                        CornerRadius="{TemplateBinding CornerRadius}">
+                    <Grid>
+                        <Border Name="RevealBackplate" Margin="0,-1,0,0"
+                                Background="{DynamicResource SystemControlTransparentRevealBackgroundBrush}"
+                                BorderBrush="{DynamicResource SystemControlTransparentRevealBorderBrush}"
+                                BorderThickness="0,1,0,1"/>
+                        <Grid ColumnDefinitions="3,48,*">
+                            <Border Name="CheckedRectangle" IsVisible="False" Height="16" CornerRadius="1.5"
+                                    Background="{DynamicResource AccentFillColorDefaultBrush}"/>
+                            <TextBlock Name="LabelPresenter" Grid.Column="1" Margin="{TemplateBinding Padding}"
+                                       VerticalAlignment="Center" Text="{TemplateBinding Tag}"
+                                       Foreground="{TemplateBinding Foreground}" FontSize="{TemplateBinding FontSize}"
+                                       FontWeight="{TemplateBinding FontWeight}" FontFamily="{TemplateBinding FontFamily}"/>
+                            <ContentPresenter Name="PART_ContentPresenter" Grid.Column="2" Margin="4,0,4,0"
+                                              Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"
+                                              HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
+                                              Foreground="{TemplateBinding Foreground}" TextWrapping="Wrap"/>
+                        </Grid>
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+    <Style Selector="RadioButton.radix:pointerover /template/ Border#ControlRoot">
+        <Setter Property="Background" Value="{DynamicResource SubtleFillColorSecondaryBrush}"/>
+    </Style>
+    <Style Selector="RadioButton.radix:pressed /template/ Border#ControlRoot">
+        <Setter Property="Background" Value="{DynamicResource SubtleFillColorTertiaryBrush}"/>
+    </Style>
+    <Style Selector="RadioButton.radix:pressed">
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
+    </Style>
+    <Style Selector="RadioButton.radix:checked /template/ Border#CheckedRectangle">
+        <Setter Property="IsVisible" Value="True"/>
+    </Style>
+    <Style Selector="RadioButton.radix:disabled /template/ Border#RevealBackplate">
+        <Setter Property="IsVisible" Value="False"/>
+    </Style>
+    <Style Selector="TextBlock.historyExpression">
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+    </Style>
+    <Style Selector="TextBlock.historyResult">
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+    </Style>
+    <!-- App.xaml's operator flyout recipe, including the original theme-specific
+         HostBackdrop brush (solid in the original dark dictionary). -->
+    <Style Selector="FlyoutPresenter">
+        <Setter Property="Background" Value="{DynamicResource AppChromeAcrylicOperatorFlyoutBackgroundBrush}"/>
+        <Setter Property="Padding" Value="2"/>
+        <Setter Property="Margin" Value="0,-3,0,0"/>
+        <Setter Property="MaxWidth" Value="Infinity"/>
+    </Style>
+</Styles>

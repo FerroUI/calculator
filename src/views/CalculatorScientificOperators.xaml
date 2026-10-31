@@ -1,0 +1,265 @@
+<!-- Adapted from upstream/calculator/src/Calculator/Views/CalculatorScientificOperators.xaml; see docs/xaml-adaptations.json. -->
+<UserControl xmlns="https://github.com/ferroui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="ControlRoot">
+    <Grid x:Name="ScientificOperators" FlowDirection="LeftToRight">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="ErrorVisualStates">
+                <VisualState x:Name="NoErrorLayout" />
+                <VisualState x:Name="ErrorLayout">
+                    <VisualState.Setters>
+                        <Setter Target="XPower2Button.IsEnabled" Value="False" />
+                        <Setter Target="PowerButton.IsEnabled" Value="False" />
+                        <Setter Target="SinButton.IsEnabled" Value="False" />
+                        <Setter Target="CosButton.IsEnabled" Value="False" />
+                        <Setter Target="TanButton.IsEnabled" Value="False" />
+                        <Setter Target="SinhButton.IsEnabled" Value="False" />
+                        <Setter Target="CoshButton.IsEnabled" Value="False" />
+                        <Setter Target="TanhButton.IsEnabled" Value="False" />
+                        <Setter Target="XPower3Button.IsEnabled" Value="False" />
+                        <Setter Target="YSquareRootButton.IsEnabled" Value="False" />
+                        <Setter Target="InvsinButton.IsEnabled" Value="False" />
+                        <Setter Target="InvcosButton.IsEnabled" Value="False" />
+                        <Setter Target="InvtanButton.IsEnabled" Value="False" />
+                        <Setter Target="InvsinhButton.IsEnabled" Value="False" />
+                        <Setter Target="InvcoshButton.IsEnabled" Value="False" />
+                        <Setter Target="InvtanhButton.IsEnabled" Value="False" />
+                        <Setter Target="SquareRootButton.IsEnabled" Value="False" />
+                        <Setter Target="PowerOf10Button.IsEnabled" Value="False" />
+                        <Setter Target="LogBase10Button.IsEnabled" Value="False" />
+                        <Setter Target="ExpButton.IsEnabled" Value="False" />
+                        <Setter Target="ModButton.IsEnabled" Value="False" />
+                        <Setter Target="InvertButton.IsEnabled" Value="False" />
+                        <Setter Target="PowerOfEButton.IsEnabled" Value="False" />
+                        <Setter Target="LogBaseEButton.IsEnabled" Value="False" />
+                        <Setter Target="DmsButton.IsEnabled" Value="False" />
+                        <Setter Target="DegreesButton.IsEnabled" Value="False" />
+                        <Setter Target="ShiftButton.IsEnabled" Value="False" />
+                        <Setter Target="DivideButton.IsEnabled" Value="False" />
+                        <Setter Target="MultiplyButton.IsEnabled" Value="False" />
+                        <Setter Target="MinusButton.IsEnabled" Value="False" />
+                        <Setter Target="PlusButton.IsEnabled" Value="False" />
+                        <Setter Target="PiButton.IsEnabled" Value="False" />
+                        <Setter Target="FactorialButton.IsEnabled" Value="False" />
+                        <Setter Target="NegateButton.IsEnabled" Value="False" />
+                        <Setter Target="OpenParenthesisButton.IsEnabled" Value="False" />
+                        <Setter Target="CloseParenthesisButton.IsEnabled" Value="False" />
+                        <Setter Target="TrigButton.IsEnabled" Value="False" />
+                        <Setter Target="FuncButton.IsEnabled" Value="False" />
+                        <Setter Target="EulerButton.IsEnabled" Value="False" />
+                        <Setter Target="AbsButton.IsEnabled" Value="False" />
+                        <Setter Target="LogBaseY.IsEnabled" Value="False" />
+                        <Setter Target="TwoPowerXButton.IsEnabled" Value="False" />
+                        <Setter Target="CubeRootButton.IsEnabled" Value="False" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <StackPanel Orientation="Horizontal" Grid.ColumnSpan="5" AutomationProperties.Name="Scientific operator panels">
+            <Button Classes="calc caption" x:Name="TrigButton" AutomationProperties.AutomationId="trigButton" AutomationProperties.Name="Trigonometry" Content="Trigonometry ▾">
+                <Button.Flyout>
+                    <Flyout>
+                        <Grid x:Name="TrigGrid" MinWidth="258" MinHeight="96" FlowDirection="LeftToRight">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*" />
+                                <RowDefinition Height="1*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                            </Grid.ColumnDefinitions>
+                            <ToggleButton Classes="calc caption" x:Name="TrigShiftButton" FontFamily="fonts:Calculator#Calculator Fluent Icons" FontSize="14" AutomationProperties.AutomationId="trigShiftButton" AutomationProperties.Name="Inverse function" Content="" />
+                            <ToggleButton Classes="calc caption" x:Name="HypButton" Grid.Row="1" AutomationProperties.AutomationId="hypShiftButton" AutomationProperties.Name="Hyperbolic function" Content="hyp" />
+                            <Grid x:Name="TrigFunctions" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="3">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1*" />
+                                    <RowDefinition Height="1*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*" />
+                                    <ColumnDefinition Width="1*" />
+                                    <ColumnDefinition Width="1*" />
+                                </Grid.ColumnDefinitions>
+                                <Button Classes="calc" Tag="Sin" x:Name="SinButton" FontSize="12" AutomationProperties.AutomationId="sinButton" AutomationProperties.Name="Sine" Content="sin" />
+                                <Button Classes="calc" Tag="Cos" x:Name="CosButton" Grid.Column="1" FontSize="12" AutomationProperties.AutomationId="cosButton" AutomationProperties.Name="Cosine" Content="cos" />
+                                <Button Classes="calc" Tag="Tan" x:Name="TanButton" Grid.Column="2" FontSize="12" AutomationProperties.AutomationId="tanButton" AutomationProperties.Name="Tangent" Content="tan" />
+                                <Button Classes="calc" Tag="Sec" x:Name="SecButton" Grid.Row="1" FontSize="12" AutomationProperties.AutomationId="secButton" AutomationProperties.Name="Secant" Content="sec" />
+                                <Button Classes="calc" Tag="Csc" x:Name="CscButton" Grid.Row="1" Grid.Column="1" FontSize="12" AutomationProperties.AutomationId="cscButton" AutomationProperties.Name="Cosecant" Content="csc" />
+                                <Button Classes="calc" Tag="Cot" x:Name="CotButton" Grid.Row="1" Grid.Column="2" FontSize="12" AutomationProperties.AutomationId="cotButton" AutomationProperties.Name="Cotangent" Content="cot" />
+                            </Grid>
+                            <Grid x:Name="InverseTrigFunctions" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="3" IsVisible="False">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1*" />
+                                    <RowDefinition Height="1*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*" />
+                                    <ColumnDefinition Width="1*" />
+                                    <ColumnDefinition Width="1*" />
+                                </Grid.ColumnDefinitions>
+                                <Button Classes="calc" Tag="InvSin" x:Name="InvsinButton" FontSize="12" AutomationProperties.AutomationId="invsinButton" AutomationProperties.Name="Arc sine" Content="sin⁻¹" />
+                                <Button Classes="calc" Tag="InvCos" x:Name="InvcosButton" Grid.Column="1" FontSize="12" AutomationProperties.AutomationId="invcosButton" AutomationProperties.Name="Arc cosine" Content="cos⁻¹" />
+                                <Button Classes="calc" Tag="InvTan" x:Name="InvtanButton" Grid.Column="2" FontSize="12" AutomationProperties.AutomationId="invtanButton" AutomationProperties.Name="Arc tangent" Content="tan⁻¹" />
+                                <Button Classes="calc" Tag="InvSec" x:Name="InvsecButton" Grid.Row="1" FontSize="12" AutomationProperties.AutomationId="invsecButton" AutomationProperties.Name="Arc secant" Content="sec⁻¹" />
+                                <Button Classes="calc" Tag="InvCsc" x:Name="InvcscButton" Grid.Row="1" Grid.Column="1" FontSize="12" AutomationProperties.AutomationId="invcscButton" AutomationProperties.Name="Arc cosecant" Content="csc⁻¹" />
+                                <Button Classes="calc" Tag="InvCot" x:Name="InvcotButton" Grid.Row="1" Grid.Column="2" FontSize="12" AutomationProperties.AutomationId="invcotButton" AutomationProperties.Name="Arc cotangent" Content="cot⁻¹" />
+                            </Grid>
+                            <Grid x:Name="HyperbolicTrigFunctions" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="3" IsVisible="False">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1*" />
+                                    <RowDefinition Height="1*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*" />
+                                    <ColumnDefinition Width="1*" />
+                                    <ColumnDefinition Width="1*" />
+                                </Grid.ColumnDefinitions>
+                                <Button Classes="calc" Tag="Sinh" x:Name="SinhButton" FontSize="12" AutomationProperties.AutomationId="sinhButton" AutomationProperties.Name="Hyperbolic sine" Content="sinh" />
+                                <Button Classes="calc" Tag="Cosh" x:Name="CoshButton" Grid.Column="1" FontSize="12" AutomationProperties.AutomationId="coshButton" AutomationProperties.Name="Hyperbolic cosine" Content="cosh" />
+                                <Button Classes="calc" Tag="Tanh" x:Name="TanhButton" Grid.Column="2" FontSize="12" AutomationProperties.AutomationId="tanhButton" AutomationProperties.Name="Hyperbolic tangent" Content="tanh" />
+                                <Button Classes="calc" Tag="Sech" x:Name="SechButton" Grid.Row="1" FontSize="12" AutomationProperties.AutomationId="sechButton" AutomationProperties.Name="Hyperbolic secant" Content="sech" />
+                                <Button Classes="calc" Tag="Csch" x:Name="CschButton" Grid.Row="1" Grid.Column="1" FontSize="12" AutomationProperties.AutomationId="cschButton" AutomationProperties.Name="Hyperbolic cosecant" Content="csch" />
+                                <Button Classes="calc" Tag="Coth" x:Name="CothButton" Grid.Row="1" Grid.Column="2" FontSize="12" AutomationProperties.AutomationId="cothButton" AutomationProperties.Name="Hyperbolic cotangent" Content="coth" />
+                            </Grid>
+                            <Grid x:Name="InverseHyperbolicTrigFunctions" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="3" IsVisible="False">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1*" />
+                                    <RowDefinition Height="1*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*" />
+                                    <ColumnDefinition Width="1*" />
+                                    <ColumnDefinition Width="1*" />
+                                </Grid.ColumnDefinitions>
+                                <Button Classes="calc" Tag="InvSinh" x:Name="InvsinhButton" FontSize="12" AutomationProperties.AutomationId="invsinhButton" AutomationProperties.Name="Hyperbolic arc sine" Content="sinh⁻¹" />
+                                <Button Classes="calc" Tag="InvCosh" x:Name="InvcoshButton" Grid.Column="1" FontSize="12" AutomationProperties.AutomationId="invcoshButton" AutomationProperties.Name="Hyperbolic arc cosine" Content="cosh⁻¹" />
+                                <Button Classes="calc" Tag="InvTanh" x:Name="InvtanhButton" Grid.Column="2" FontSize="12" AutomationProperties.AutomationId="invtanhButton" AutomationProperties.Name="Hyperbolic arc tangent" Content="tanh⁻¹" />
+                                <Button Classes="calc" Tag="InvSech" x:Name="InvsechButton" Grid.Row="1" FontSize="12" AutomationProperties.AutomationId="invsechButton" AutomationProperties.Name="Hyperbolic arc secant" Content="sech⁻¹" />
+                                <Button Classes="calc" Tag="InvCsch" x:Name="InvcschButton" Grid.Row="1" Grid.Column="1" FontSize="12" AutomationProperties.AutomationId="invcschButton" AutomationProperties.Name="Hyperbolic arc cosecant" Content="csch⁻¹" />
+                                <Button Classes="calc" Tag="InvCoth" x:Name="InvcothButton" Grid.Row="1" Grid.Column="2" FontSize="12" AutomationProperties.AutomationId="invcothButton" AutomationProperties.Name="Hyperbolic arc cotangent" Content="coth⁻¹" />
+                            </Grid>
+                        </Grid>
+                    </Flyout>
+                </Button.Flyout>
+            </Button>
+            <Button Classes="calc caption" x:Name="FuncButton" AutomationProperties.AutomationId="funcButton" AutomationProperties.Name="Functions" Content="Function ▾">
+                <Button.Flyout>
+                    <Flyout>
+                        <Grid x:Name="FuncGrid" MinWidth="194" MinHeight="96" FlowDirection="LeftToRight">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*" />
+                                <RowDefinition Height="1*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                            </Grid.ColumnDefinitions>
+                            <Button Classes="calc symbol" Tag="Abs" x:Name="AbsFlyoutButton" AutomationProperties.AutomationId="absButton" AutomationProperties.Name="Absolute value" Content="" />
+                            <Button Classes="calc symbol" Tag="Floor" x:Name="FloorButton" Grid.Column="1" AutomationProperties.AutomationId="floorButton" AutomationProperties.Name="Floor" Content="" />
+                            <Button Classes="calc symbol" Tag="Ceil" x:Name="CeilButton" Grid.Column="2" AutomationProperties.AutomationId="ceilButton" AutomationProperties.Name="Ceiling" Content="" />
+                            <Button Classes="calc" Tag="Rand" x:Name="RandButton" Grid.Row="1" FontSize="12" AutomationProperties.AutomationId="randButton" AutomationProperties.Name="Random" Content="rand" />
+                            <Button Classes="calc symbol" Tag="DMS" x:Name="DmsButton" Grid.Row="1" Grid.Column="1" AutomationProperties.AutomationId="dmsButton" AutomationProperties.Name="Degree minute second" Content="" />
+                            <Button Classes="calc symbol" Tag="Degrees" x:Name="DegreesButton" Grid.Row="1" Grid.Column="2" AutomationProperties.AutomationId="degreesButton" AutomationProperties.Name="Degrees" Content="" />
+                        </Grid>
+                    </Flyout>
+                </Button.Flyout>
+            </Button>
+        </StackPanel>
+        <ToggleButton Classes="calc caption" x:Name="ShiftButton" Grid.Row="1" FontFamily="fonts:Calculator#Calculator Fluent Icons" FontSize="14" AutomationProperties.AutomationId="shiftButton" AutomationProperties.Name="Inverse function" Content="" />
+        <Button Classes="calc symbol" Tag="Pi" x:Name="PiButton" Grid.Row="1" Grid.Column="1" FontSize="14" AutomationProperties.AutomationId="piButton" AutomationProperties.Name="Pi" Content="" />
+        <Button Classes="calc" Tag="Euler" x:Name="EulerButton" Grid.Row="1" Grid.Column="2" FontSize="14" AutomationProperties.AutomationId="eulerButton" AutomationProperties.Name="Euler's number" Content="e" />
+        <Grid x:Name="DisplayControls" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="3" AutomationProperties.Name="Display controls">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Button Classes="calc" Tag="ClearEntry" x:Name="ClearEntryButton" Grid.Column="1" FontSize="16" AutomationProperties.AutomationId="clearEntryButton" AutomationProperties.Name="Clear entry" Content="CE" />
+            <Button Classes="calc" Tag="Clear" x:Name="ClearButton" Grid.Column="1" FontSize="16" AutomationProperties.AutomationId="clearButton" AutomationProperties.Name="Clear" Content="C" />
+            <Button Classes="calc symbol" Tag="Backspace" x:Name="BackSpaceButton" Grid.Column="2" FontFamily="fonts:Calculator#Calculator Fluent Icons" FontSize="16" AutomationProperties.AutomationId="backSpaceButton" AutomationProperties.Name="Backspace" Content="" />
+        </Grid>
+        <Grid Grid.Row="2" Grid.RowSpan="6" AutomationProperties.Name="Scientific functions">
+            <Grid x:Name="Row1">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Button Classes="calc symbol" Tag="XPower2" x:Name="XPower2Button" AutomationProperties.AutomationId="xpower2Button" AutomationProperties.Name="Square" Content="" />
+                <Button Classes="calc symbol" Tag="Sqrt" x:Name="SquareRootButton" Grid.Row="1" AutomationProperties.AutomationId="squareRootButton" AutomationProperties.Name="Square root" Content="" />
+                <Button Classes="calc symbol" Tag="XPowerY" x:Name="PowerButton" Grid.Row="2" AutomationProperties.AutomationId="powerButton" AutomationProperties.Name="'X' to the exponent" Content="" />
+                <Button Classes="calc symbol" Tag="TenPowerX" x:Name="PowerOf10Button" Grid.Row="3" AutomationProperties.AutomationId="powerOf10Button" AutomationProperties.Name="Ten to the exponent" Content="" />
+                <Button Classes="calc" Tag="LogBase10" x:Name="LogBase10Button" Grid.Row="4" AutomationProperties.AutomationId="logBase10Button" AutomationProperties.Name="Log" Content="log" />
+                <Button Classes="calc" Tag="LogBaseE" x:Name="LogBaseEButton" Grid.Row="5" AutomationProperties.AutomationId="logBaseEButton" AutomationProperties.Name="Natural log" Content="ln" />
+            </Grid>
+            <Grid x:Name="InvRow1" IsVisible="False">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Button Classes="calc" Tag="Cube" x:Name="XPower3Button" AutomationProperties.AutomationId="xpower3Button" AutomationProperties.Name="Cube" Content="" />
+                <Button Classes="calc" Tag="CubeRoot" x:Name="CubeRootButton" Grid.Row="1" AutomationProperties.AutomationId="cubeRootButton" AutomationProperties.Name="Cube root" Content="" />
+                <Button Classes="calc" Tag="YRootX" x:Name="YSquareRootButton" Grid.Row="2" AutomationProperties.AutomationId="ySquareRootButton" AutomationProperties.Name="'y' root of 'x'" Content="" />
+                <Button Classes="calc" Tag="TwoPowerX" x:Name="TwoPowerXButton" Grid.Row="3" AutomationProperties.AutomationId="twoPowerXButton" AutomationProperties.Name="Two to the exponent" Content="" />
+                <Button Classes="calc" Tag="LogBaseY" x:Name="LogBaseY" Grid.Row="4" AutomationProperties.AutomationId="logBaseY" AutomationProperties.Name="Log base Y" Content="" />
+                <Button Classes="calc" Tag="EPowerX" x:Name="PowerOfEButton" Grid.Row="5" AutomationProperties.AutomationId="powerOfEButton" AutomationProperties.Name="'e' to the exponent" Content="" />
+            </Grid>
+        </Grid>
+        <Grid x:Name="Row2" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <Button Classes="calc symbol" Tag="Invert" x:Name="InvertButton" AutomationProperties.AutomationId="invertButton" AutomationProperties.Name="Reciprocal" Content="" />
+            <Button Classes="calc symbol" Tag="Abs" x:Name="AbsButton" Grid.Column="1" AutomationProperties.AutomationId="absButton" AutomationProperties.Name="Absolute value" Content="" />
+            <Button Classes="calc" Tag="Exp" x:Name="ExpButton" Grid.Column="2" AutomationProperties.AutomationId="expButton" AutomationProperties.Name="Exponential" Content="exp" />
+            <Button Classes="calc" Tag="Mod" x:Name="ModButton" Grid.Column="3" AutomationProperties.AutomationId="modButton" AutomationProperties.Name="Modulo" Content="mod" />
+        </Grid>
+        <Button Classes="calc" Tag="OpenParenthesis" x:Name="OpenParenthesisButton" Grid.Row="3" Grid.Column="1" FontSize="19" AutomationProperties.AutomationId="openParenthesisButton" AutomationProperties.Name="Left parenthesis" Content="(" />
+        <Button Classes="calc" Tag="CloseParenthesis" x:Name="CloseParenthesisButton" Grid.Row="3" Grid.Column="2" FontSize="19" AutomationProperties.AutomationId="closeParenthesisButton" AutomationProperties.Name="Right parenthesis" Content=")" />
+        <Button Classes="calc symbol" Tag="Factorial" x:Name="FactorialButton" Grid.Row="3" Grid.Column="3" FontSize="18" AutomationProperties.AutomationId="factorialButton" AutomationProperties.Name="Factorial" Content="" />
+        <Grid x:Name="StandardOperators" Grid.Row="3" Grid.RowSpan="5" Grid.Column="4" AutomationProperties.Name="Standard operators">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Button Classes="calc symbol" Tag="Divide" x:Name="DivideButton" Grid.Row="0" AutomationProperties.AutomationId="divideButton" AutomationProperties.Name="Divide by" Content="" />
+            <Button Classes="calc symbol" Tag="Multiply" x:Name="MultiplyButton" Grid.Row="1" AutomationProperties.AutomationId="multiplyButton" AutomationProperties.Name="Multiply by" Content="" />
+            <Button Classes="calc symbol" Tag="Subtract" x:Name="MinusButton" Grid.Row="2" AutomationProperties.AutomationId="minusButton" AutomationProperties.Name="Minus" Content="" />
+            <Button Classes="calc symbol" Tag="Add" x:Name="PlusButton" Grid.Row="3" AutomationProperties.AutomationId="plusButton" AutomationProperties.Name="Plus" Content="" />
+            <Button Classes="calc symbol equals" Tag="Equals" x:Name="EqualButton" Grid.Row="4" AutomationProperties.AutomationId="equalButton" AutomationProperties.Name="Equals" Content="" />
+        </Grid>
+        <Button Classes="calc symbol" Tag="Negate" x:Name="NegateButton" Grid.Row="7" Grid.Column="1" FontSize="16" FontWeight="Normal" AutomationProperties.AutomationId="negateButton" AutomationProperties.Name="Positive negative" Content="" />
+        <ContentControl x:Name="NumberPad" Grid.Row="4" Grid.RowSpan="4" Grid.Column="1" Grid.ColumnSpan="3" AutomationProperties.Name="Number pad" />
+    </Grid>
+</UserControl>

@@ -1,0 +1,31 @@
+<!-- Adapted from upstream/calculator/src/Calculator/Views/CalculatorScientificAngleButtons.xaml; see docs/xaml-adaptations.json. -->
+<UserControl xmlns="https://github.com/ferroui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="ControlRoot">
+    <Grid x:Name="ScientificAngleOperators" Margin="3,0,3,0" AutomationProperties.Name="Angle operators">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" MaxWidth="80" />
+            <ColumnDefinition Width="1*" MaxWidth="80" />
+            <ColumnDefinition Width="1*" MaxWidth="80" />
+            <ColumnDefinition Width="1*" MaxWidth="80" />
+            <ColumnDefinition Width="1*" MaxWidth="80" />
+            <ColumnDefinition Width="0.01*" />
+            <ColumnDefinition Width="1*" MaxWidth="80" />
+        </Grid.ColumnDefinitions>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="ErrorVisualStates">
+                <VisualState x:Name="NoErrorLayout" />
+                <VisualState x:Name="ErrorLayout">
+                    <VisualState.Setters>
+                        <Setter Target="DegreeButton.IsEnabled" Value="False" />
+                        <Setter Target="RadianButton.IsEnabled" Value="False" />
+                        <Setter Target="GradsButton.IsEnabled" Value="False" />
+                        <Setter Target="FtoeButton.IsEnabled" Value="False" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <Button Classes="calc caption" x:Name="DegreeButton" AutomationProperties.AutomationId="degButton" AutomationProperties.Name="Degrees toggle" Content="DEG" />
+        <Button Classes="calc caption" x:Name="RadianButton" AutomationProperties.AutomationId="radButton" AutomationProperties.Name="Radians toggle" Content="RAD" IsVisible="False" />
+        <Button Classes="calc caption" x:Name="GradsButton" AutomationProperties.AutomationId="gradButton" AutomationProperties.Name="Gradians toggle" Content="GRAD" IsVisible="False" />
+        <ToggleButton Classes="calc caption" x:Name="FtoeButton" Grid.Column="1" AutomationProperties.AutomationId="ftoeButton" AutomationProperties.Name="Scientific notation" Content="F-E" />
+    </Grid>
+</UserControl>

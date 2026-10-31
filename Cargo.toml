@@ -1,0 +1,31 @@
+[package]
+name = "ferro-calculator"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.89"
+license = "MIT"
+description = "Microsoft Calculator port for FerroUI, using the original C++ engine"
+
+[workspace]
+
+[features]
+default = ["desktop"]
+ui = ["dep:ferroui", "dep:ferroui-base", "dep:ferroui-controls"]
+desktop = ["ui", "ferroui/desktop"]
+headless = ["ui", "ferroui/headless", "ferroui/desktop"]
+
+[dependencies]
+ferroui = { git = "https://github.com/wieslawsoltes/FerroUI", rev = "62b4843106ac69d3769b2f8e3dd771837534b960", optional = true, default-features = false, features = ["winui-theme", "xaml"] }
+ferroui-base = { git = "https://github.com/wieslawsoltes/FerroUI", rev = "62b4843106ac69d3769b2f8e3dd771837534b960", optional = true }
+ferroui-controls = { git = "https://github.com/wieslawsoltes/FerroUI", rev = "62b4843106ac69d3769b2f8e3dd771837534b960", optional = true }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+chrono = { version = "0.4", default-features = false, features = ["std", "clock"] }
+
+[build-dependencies]
+cc = "1"
+
+[[bin]]
+name = "ferro-calculator"
+path = "src/main.rs"
+required-features = ["desktop"]

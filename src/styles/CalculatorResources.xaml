@@ -1,0 +1,125 @@
+<!-- Original App.xaml colours and native Reveal/Acrylic recipes; platform material policy controls fallbacks. -->
+<ResourceDictionary xmlns="https://github.com/ferroui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ResourceDictionary.ThemeDictionaries>
+        <ResourceDictionary x:Key="Dark">
+            <Color x:Key="AltHighColor">#FF000000</Color>
+            <Color x:Key="ChromeMediumLowColor">#FF2B2B2B</Color>
+            <Color x:Key="OperatorPanelScrollButtonBackgroundColor">#FF858585</Color>
+            <SolidColorBrush x:Key="SystemControlBackgroundAltHighBrush" Color="{StaticResource AltHighColor}" />
+            <SolidColorBrush x:Key="SystemControlBackgroundChromeMediumLowBrush" Color="{StaticResource ChromeMediumLowColor}" />
+            <SolidColorBrush x:Key="SystemControlBackgroundTransparentBrush" Color="Transparent" />
+            <SolidColorBrush x:Key="SystemControlHighlightTransparentBrush" Color="Transparent" />
+            <SolidColorBrush x:Key="AppBackgroundAltMediumLowBrush" Color="{DynamicResource SystemAltMediumLowColor}" />
+            <SolidColorBrush x:Key="AppOperatorPanelBackground" Opacity="0.4" Color="{DynamicResource SystemAltMediumLowColor}" />
+            <SolidColorBrush x:Key="AppControlPageTextBaseMediumHighBrush" Color="{StaticResource SystemBaseMediumHighColor}" />
+            <RevealBackgroundBrush x:Key="AppControlHoverButtonFaceBrush" FallbackColor="#18FFFFFF" Color="#18FFFFFF" TargetTheme="Dark" />
+            <RevealBackgroundBrush x:Key="AppControlPressedButtonFaceBrush" FallbackColor="#30FFFFFF" Color="#30FFFFFF" TargetTheme="Dark" />
+            <SolidColorBrush x:Key="AppControlTransparentAccentColorBrush" Color="{DynamicResource SystemAccentColor}" />
+            <SolidColorBrush x:Key="AppControlPageTextBaseHighColorBrush" Color="{StaticResource SystemBaseHighColor}" />
+            <SolidColorBrush x:Key="OperatorPanelScrollButtonBackgroundBrush" Color="{DynamicResource OperatorPanelScrollButtonBackgroundColor}" />
+            <SolidColorBrush x:Key="AppControlHighlightCalcButtonBrush" Opacity="0.4" Color="{DynamicResource SystemAccentColor}" />
+            <SolidColorBrush x:Key="AppControlHighlightCalcButtonToggledBrush" Opacity="0.4" Color="{DynamicResource SystemAccentColor}" />
+            <SolidColorBrush x:Key="AppControlHighlightCalcButtonHoverBrush" Opacity="0.9" Color="{DynamicResource SystemAccentColor}" />
+            <SolidColorBrush x:Key="AppControlForegroundAccentBrush" Color="{DynamicResource SystemAccentColor}" />
+            <SolidColorBrush x:Key="AppControlPageTextRedColorBrush" Color="Red" />
+            <RevealBorderBrush x:Key="AppControlForegroundTransparentRevealBorderBrush" FallbackColor="Transparent" TargetTheme="Dark" Color="Transparent" />
+            <RevealBackgroundBrush x:Key="AppControlHighlightAccentRevealBackgroundBrush" FallbackColor="{DynamicResource SystemAccentColor}" TargetTheme="Dark" Color="{DynamicResource SystemAccentColor}" />
+            <RevealBackgroundBrush x:Key="AppControlBackgroundListAccentHighRevealBackgroundBrush" FallbackColor="{DynamicResource SystemAccentColorDark3}" TargetTheme="Dark" Color="{DynamicResource SystemAccentColorDark3}" />
+            <AcrylicBrush x:Key="AppChromeAcrylicHostBackdropMediumLowBrush" BackgroundSource="HostBackdrop" FallbackColor="{DynamicResource SystemChromeMediumColor}" TintColor="{DynamicResource SystemChromeLowColor}" TintOpacity="0.7" />
+            <SolidColorBrush x:Key="AppChromeAcrylicOperatorFlyoutBackgroundBrush" Color="#FF2F2F2F" />
+            <SolidColorBrush x:Key="AppControlTransparentButtonBackgroundBrush" Color="Transparent" />
+            <SolidColorBrush x:Key="EquationBrush1" Color="#4D92C8" />
+            <SolidColorBrush x:Key="EquationBrush2" Color="#4DCDD5" />
+            <SolidColorBrush x:Key="EquationBrush3" Color="#A366E0" />
+            <SolidColorBrush x:Key="EquationBrush4" Color="#58A358" />
+            <SolidColorBrush x:Key="EquationBrush5" Color="#4DDB97" />
+            <SolidColorBrush x:Key="EquationBrush6" Color="#4DA688" />
+            <SolidColorBrush x:Key="EquationBrush7" Color="#8A8B8C" />
+            <SolidColorBrush x:Key="EquationBrush8" Color="#EF5865" />
+            <SolidColorBrush x:Key="EquationBrush9" Color="#EB4DAF" />
+            <SolidColorBrush x:Key="EquationBrush10" Color="#CA5B93" />
+            <SolidColorBrush x:Key="EquationBrush11" Color="#FFCE4D" />
+            <SolidColorBrush x:Key="EquationBrush12" Color="#F99255" />
+            <SolidColorBrush x:Key="EquationBrush13" Color="#B0896D" />
+            <SolidColorBrush x:Key="EquationBrush14" Color="#FFFFFF" />
+            <StaticResource x:Key="CalcButtonTextFillColorDefaultBrush" ResourceKey="TextFillColorPrimaryBrush" />
+            <StaticResource x:Key="CalcButtonTextFillColorHoverBrush" ResourceKey="TextFillColorPrimaryBrush" />
+            <StaticResource x:Key="CalcButtonTextFillColorPressedBrush" ResourceKey="TextFillColorSecondaryBrush" />
+            <StaticResource x:Key="CalcButtonTextFillColorDisabledBrush" ResourceKey="TextFillColorDisabledBrush" />
+            <Color x:Key="CalcButtonBaseFillColor">#FFFFFF</Color>
+            <SolidColorBrush x:Key="CalcButtonFillColorDefaultBrush" Opacity="0.125" Color="{StaticResource CalcButtonBaseFillColor}" />
+            <SolidColorBrush x:Key="CalcButtonFillColorHoverBrush" Opacity="0.0852" Color="{StaticResource CalcButtonBaseFillColor}" />
+            <SolidColorBrush x:Key="CalcButtonFillColorPressedBrush" Opacity="0.0359" Color="{StaticResource CalcButtonBaseFillColor}" />
+            <SolidColorBrush x:Key="CalcButtonFillColorDisabledBrush" Opacity="0.0359" Color="{StaticResource CalcButtonBaseFillColor}" />
+            <SolidColorBrush x:Key="CalcButtonAltFillColorDefaultBrush" Opacity="0.0852" Color="{StaticResource CalcButtonBaseFillColor}" />
+            <SolidColorBrush x:Key="CalcButtonAltFillColorHoverBrush" Opacity="0.1256" Color="{StaticResource CalcButtonBaseFillColor}" />
+            <SolidColorBrush x:Key="CalcButtonAltFillColorPressedBrush" Opacity="0.0852" Color="{StaticResource CalcButtonBaseFillColor}" />
+            <SolidColorBrush x:Key="CalcButtonAltFillColorDisabledBrush" Opacity="0.0359" Color="{StaticResource CalcButtonBaseFillColor}" />
+            <Color x:Key="BackgroundSmokeFillColor">#000000</Color>
+            <SolidColorBrush x:Key="BackgroundSmokeFillColorBrush" Opacity="0.42" Color="{StaticResource BackgroundSmokeFillColor}" />
+            <StaticResource x:Key="AppControlForegroundSecondaryBrush" ResourceKey="TextFillColorSecondaryBrush" />
+            <StaticResource x:Key="AppControlBackgroundTertiaryBrush" ResourceKey="SubtleFillColorTertiaryBrush" />
+            <StaticResource x:Key="AppControlBackgroundSecondaryBrush" ResourceKey="SubtleFillColorSecondaryBrush" />
+        </ResourceDictionary>
+        <ResourceDictionary x:Key="Light">
+            <Color x:Key="AltHighColor">#FFF2F2F2</Color>
+            <Color x:Key="ChromeMediumLowColor">#FFE0E0E0</Color>
+            <Color x:Key="OperatorPanelScrollButtonBackgroundColor">#FF858585</Color>
+            <SolidColorBrush x:Key="SystemControlBackgroundAltHighBrush" Color="{StaticResource SystemAltHighColor}" />
+            <SolidColorBrush x:Key="SystemControlBackgroundChromeMediumLowBrush" Color="{StaticResource ChromeMediumLowColor}" />
+            <SolidColorBrush x:Key="SystemControlBackgroundTransparentBrush" Color="Transparent" />
+            <SolidColorBrush x:Key="SystemControlHighlightTransparentBrush" Color="Transparent" />
+            <SolidColorBrush x:Key="AppBackgroundAltMediumLowBrush" Color="{DynamicResource SystemAltMediumLowColor}" />
+            <SolidColorBrush x:Key="AppOperatorPanelBackground" Opacity="0.4" Color="{DynamicResource SystemAltMediumLowColor}" />
+            <SolidColorBrush x:Key="AppControlPageTextBaseMediumHighBrush" Color="{StaticResource SystemBaseMediumHighColor}" />
+            <RevealBackgroundBrush x:Key="AppControlHoverButtonFaceBrush" FallbackColor="#17000000" Color="#17000000" TargetTheme="Light" />
+            <RevealBackgroundBrush x:Key="AppControlPressedButtonFaceBrush" FallbackColor="#30000000" Color="#30000000" TargetTheme="Light" />
+            <SolidColorBrush x:Key="AppControlTransparentAccentColorBrush" Color="{DynamicResource SystemAccentColor}" />
+            <SolidColorBrush x:Key="AppControlPageTextBaseHighColorBrush" Color="{StaticResource SystemBaseHighColor}" />
+            <SolidColorBrush x:Key="OperatorPanelScrollButtonBackgroundBrush" Color="{DynamicResource OperatorPanelScrollButtonBackgroundColor}" />
+            <SolidColorBrush x:Key="AppControlForegroundAccentBrush" Color="{DynamicResource SystemAccentColor}" />
+            <SolidColorBrush x:Key="AppControlPageTextRedColorBrush" Color="Red" />
+            <SolidColorBrush x:Key="AppControlHighlightCalcButtonBrush" Opacity="0.4" Color="{DynamicResource SystemAccentColor}" />
+            <SolidColorBrush x:Key="AppControlHighlightCalcButtonToggledBrush" Opacity="0.4" Color="{DynamicResource SystemAccentColor}" />
+            <SolidColorBrush x:Key="AppControlHighlightCalcButtonHoverBrush" Opacity="0.7" Color="{DynamicResource SystemAccentColor}" />
+            <RevealBorderBrush x:Key="AppControlForegroundTransparentRevealBorderBrush" FallbackColor="Transparent" TargetTheme="Light" Color="Transparent" />
+            <RevealBackgroundBrush x:Key="AppControlHighlightAccentRevealBackgroundBrush" FallbackColor="{DynamicResource SystemAccentColor}" TargetTheme="Light" Color="{DynamicResource SystemAccentColor}" />
+            <RevealBackgroundBrush x:Key="AppControlBackgroundListAccentHighRevealBackgroundBrush" FallbackColor="{DynamicResource SystemAccentColorLight3}" TargetTheme="Light" Color="{DynamicResource SystemAccentColorLight3}" />
+            <AcrylicBrush x:Key="AppChromeAcrylicHostBackdropMediumLowBrush" BackgroundSource="HostBackdrop" FallbackColor="{DynamicResource SystemChromeMediumColor}" TintColor="{DynamicResource SystemChromeLowColor}" TintOpacity="0.7" />
+            <AcrylicBrush x:Key="AppChromeAcrylicOperatorFlyoutBackgroundBrush" BackgroundSource="HostBackdrop" FallbackColor="{DynamicResource SystemChromeMediumColor}" TintColor="{DynamicResource SystemChromeLowColor}" TintOpacity="0.8" />
+            <SolidColorBrush x:Key="AppControlTransparentButtonBackgroundBrush" Color="Transparent" />
+            <SolidColorBrush x:Key="EquationBrush1" Color="#FF0063B1" />
+            <SolidColorBrush x:Key="EquationBrush2" Color="#FF00B7C3" />
+            <SolidColorBrush x:Key="EquationBrush3" Color="#FF6600CC" />
+            <SolidColorBrush x:Key="EquationBrush4" Color="#FF107C10" />
+            <SolidColorBrush x:Key="EquationBrush5" Color="#FF00CC6A" />
+            <SolidColorBrush x:Key="EquationBrush6" Color="#FF008055" />
+            <SolidColorBrush x:Key="EquationBrush7" Color="#FF58595B" />
+            <SolidColorBrush x:Key="EquationBrush8" Color="#FFE81123" />
+            <SolidColorBrush x:Key="EquationBrush9" Color="#FFE3008C" />
+            <SolidColorBrush x:Key="EquationBrush10" Color="#FFB31564" />
+            <SolidColorBrush x:Key="EquationBrush11" Color="#FFFFB900" />
+            <SolidColorBrush x:Key="EquationBrush12" Color="#FFF7630C" />
+            <SolidColorBrush x:Key="EquationBrush13" Color="#FF8E562E" />
+            <SolidColorBrush x:Key="EquationBrush14" Color="#FF000000" />
+            <StaticResource x:Key="CalcButtonTextFillColorDefaultBrush" ResourceKey="TextFillColorPrimaryBrush" />
+            <StaticResource x:Key="CalcButtonTextFillColorHoverBrush" ResourceKey="TextFillColorPrimaryBrush" />
+            <StaticResource x:Key="CalcButtonTextFillColorPressedBrush" ResourceKey="TextFillColorSecondaryBrush" />
+            <StaticResource x:Key="CalcButtonTextFillColorDisabledBrush" ResourceKey="TextFillColorDisabledBrush" />
+            <Color x:Key="CalcButtonBaseFillColor">#FFFFFF</Color>
+            <SolidColorBrush x:Key="CalcButtonFillColorDefaultBrush" Opacity="1" Color="{StaticResource CalcButtonBaseFillColor}" />
+            <SolidColorBrush x:Key="CalcButtonFillColorHoverBrush" Opacity="0.75" Color="{StaticResource CalcButtonBaseFillColor}" />
+            <SolidColorBrush x:Key="CalcButtonFillColorPressedBrush" Opacity="0.5" Color="{StaticResource CalcButtonBaseFillColor}" />
+            <SolidColorBrush x:Key="CalcButtonFillColorDisabledBrush" Opacity="0.125" Color="{StaticResource CalcButtonBaseFillColor}" />
+            <SolidColorBrush x:Key="CalcButtonAltFillColorDefaultBrush" Opacity="0.5" Color="{StaticResource CalcButtonBaseFillColor}" />
+            <SolidColorBrush x:Key="CalcButtonAltFillColorHoverBrush" Opacity="0.25" Color="{StaticResource CalcButtonBaseFillColor}" />
+            <SolidColorBrush x:Key="CalcButtonAltFillColorPressedBrush" Opacity="0.125" Color="{StaticResource CalcButtonBaseFillColor}" />
+            <SolidColorBrush x:Key="CalcButtonAltFillColorDisabledBrush" Opacity="0.125" Color="{StaticResource CalcButtonBaseFillColor}" />
+            <Color x:Key="BackgroundSmokeFillColor">#000000</Color>
+            <SolidColorBrush x:Key="BackgroundSmokeFillColorBrush" Opacity="0.3" Color="{StaticResource BackgroundSmokeFillColor}" />
+            <StaticResource x:Key="AppControlForegroundSecondaryBrush" ResourceKey="TextFillColorSecondaryBrush" />
+            <StaticResource x:Key="AppControlBackgroundTertiaryBrush" ResourceKey="SubtleFillColorTertiaryBrush" />
+            <StaticResource x:Key="AppControlBackgroundSecondaryBrush" ResourceKey="SubtleFillColorSecondaryBrush" />
+        </ResourceDictionary>
+    </ResourceDictionary.ThemeDictionaries>
+</ResourceDictionary>

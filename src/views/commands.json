@@ -1,0 +1,829 @@
+{
+  "NumberPad.xaml": [
+    {
+      "name": "Num0Button",
+      "command": "Zero",
+      "shortcuts": {
+        "Character": "0"
+      }
+    },
+    {
+      "name": "Num1Button",
+      "command": "One",
+      "shortcuts": {
+        "Character": "1"
+      }
+    },
+    {
+      "name": "Num2Button",
+      "command": "Two",
+      "shortcuts": {
+        "Character": "2"
+      }
+    },
+    {
+      "name": "Num3Button",
+      "command": "Three",
+      "shortcuts": {
+        "Character": "3"
+      }
+    },
+    {
+      "name": "Num4Button",
+      "command": "Four",
+      "shortcuts": {
+        "Character": "4"
+      }
+    },
+    {
+      "name": "Num5Button",
+      "command": "Five",
+      "shortcuts": {
+        "Character": "5"
+      }
+    },
+    {
+      "name": "Num6Button",
+      "command": "Six",
+      "shortcuts": {
+        "Character": "6"
+      }
+    },
+    {
+      "name": "Num7Button",
+      "command": "Seven",
+      "shortcuts": {
+        "Character": "7"
+      }
+    },
+    {
+      "name": "Num8Button",
+      "command": "Eight",
+      "shortcuts": {
+        "Character": "8"
+      }
+    },
+    {
+      "name": "Num9Button",
+      "command": "Nine",
+      "shortcuts": {
+        "Character": "9"
+      }
+    },
+    {
+      "name": "DecimalSeparatorButton",
+      "command": "Decimal",
+      "shortcuts": {
+        "Character": ".",
+        "VirtualKey": "Decimal"
+      }
+    }
+  ],
+  "CalculatorStandardOperators.xaml": [
+    {
+      "name": "PercentButton",
+      "command": "Percent",
+      "shortcuts": {
+        "Character": "%"
+      }
+    },
+    {
+      "name": "ClearEntryButton",
+      "command": "ClearEntry",
+      "shortcuts": {
+        "VirtualKey": "Delete"
+      }
+    },
+    {
+      "name": "ClearButton",
+      "command": "Clear",
+      "shortcuts": {
+        "VirtualKey": "Escape"
+      }
+    },
+    {
+      "name": "BackSpaceButton",
+      "command": "Backspace",
+      "shortcuts": {
+        "VirtualKey": "Back"
+      }
+    },
+    {
+      "name": "InvertButton",
+      "command": "Invert",
+      "shortcuts": {
+        "VirtualKey": "R"
+      }
+    },
+    {
+      "name": "XPower2Button",
+      "command": "XPower2",
+      "shortcuts": {
+        "VirtualKey": "Q"
+      }
+    },
+    {
+      "name": "SquareRootButton",
+      "command": "Sqrt",
+      "shortcuts": {
+        "Character": "@"
+      }
+    },
+    {
+      "name": "DivideButton",
+      "command": "Divide",
+      "shortcuts": {
+        "Character": "/"
+      }
+    },
+    {
+      "name": "MultiplyButton",
+      "command": "Multiply",
+      "shortcuts": {
+        "Character": "*"
+      }
+    },
+    {
+      "name": "MinusButton",
+      "command": "Subtract",
+      "shortcuts": {
+        "Character": "-"
+      }
+    },
+    {
+      "name": "PlusButton",
+      "command": "Add",
+      "shortcuts": {
+        "Character": "+"
+      }
+    },
+    {
+      "name": "EqualButton",
+      "command": "Equals",
+      "shortcuts": {
+        "Character": "=",
+        "VirtualKey": "Enter"
+      }
+    },
+    {
+      "name": "NegateButton",
+      "command": "Negate",
+      "shortcuts": {
+        "VirtualKey": "F9"
+      }
+    }
+  ],
+  "CalculatorScientificOperators.xaml": [
+    {
+      "name": "SinButton",
+      "command": "Sin",
+      "shortcuts": {
+        "VirtualKey": "S"
+      }
+    },
+    {
+      "name": "CosButton",
+      "command": "Cos",
+      "shortcuts": {
+        "VirtualKey": "O"
+      }
+    },
+    {
+      "name": "TanButton",
+      "command": "Tan",
+      "shortcuts": {
+        "VirtualKey": "T"
+      }
+    },
+    {
+      "name": "SecButton",
+      "command": "Sec",
+      "shortcuts": {
+        "VirtualKey": "U"
+      }
+    },
+    {
+      "name": "CscButton",
+      "command": "Csc",
+      "shortcuts": {
+        "VirtualKey": "I"
+      }
+    },
+    {
+      "name": "CotButton",
+      "command": "Cot",
+      "shortcuts": {
+        "VirtualKey": "J"
+      }
+    },
+    {
+      "name": "InvsinButton",
+      "command": "InvSin",
+      "shortcuts": {
+        "VirtualKeyShiftChord": "S"
+      }
+    },
+    {
+      "name": "InvcosButton",
+      "command": "InvCos",
+      "shortcuts": {
+        "VirtualKeyShiftChord": "O"
+      }
+    },
+    {
+      "name": "InvtanButton",
+      "command": "InvTan",
+      "shortcuts": {
+        "VirtualKeyShiftChord": "T"
+      }
+    },
+    {
+      "name": "InvsecButton",
+      "command": "InvSec",
+      "shortcuts": {
+        "VirtualKeyShiftChord": "U"
+      }
+    },
+    {
+      "name": "InvcscButton",
+      "command": "InvCsc",
+      "shortcuts": {
+        "VirtualKeyShiftChord": "I"
+      }
+    },
+    {
+      "name": "InvcotButton",
+      "command": "InvCot",
+      "shortcuts": {
+        "VirtualKeyShiftChord": "J"
+      }
+    },
+    {
+      "name": "SinhButton",
+      "command": "Sinh",
+      "shortcuts": {
+        "VirtualKeyControlChord": "S"
+      }
+    },
+    {
+      "name": "CoshButton",
+      "command": "Cosh",
+      "shortcuts": {
+        "VirtualKeyControlChord": "O"
+      }
+    },
+    {
+      "name": "TanhButton",
+      "command": "Tanh",
+      "shortcuts": {
+        "VirtualKeyControlChord": "T"
+      }
+    },
+    {
+      "name": "SechButton",
+      "command": "Sech",
+      "shortcuts": {
+        "VirtualKeyControlChord": "U"
+      }
+    },
+    {
+      "name": "CschButton",
+      "command": "Csch",
+      "shortcuts": {
+        "VirtualKeyControlChord": "I"
+      }
+    },
+    {
+      "name": "CothButton",
+      "command": "Coth",
+      "shortcuts": {
+        "VirtualKeyControlChord": "J"
+      }
+    },
+    {
+      "name": "InvsinhButton",
+      "command": "InvSinh",
+      "shortcuts": {
+        "VirtualKeyControlShiftChord": "S"
+      }
+    },
+    {
+      "name": "InvcoshButton",
+      "command": "InvCosh",
+      "shortcuts": {
+        "VirtualKeyControlShiftChord": "O"
+      }
+    },
+    {
+      "name": "InvtanhButton",
+      "command": "InvTanh",
+      "shortcuts": {
+        "VirtualKeyControlShiftChord": "T"
+      }
+    },
+    {
+      "name": "InvsechButton",
+      "command": "InvSech",
+      "shortcuts": {
+        "VirtualKeyControlShiftChord": "U"
+      }
+    },
+    {
+      "name": "InvcschButton",
+      "command": "InvCsch",
+      "shortcuts": {
+        "VirtualKeyControlShiftChord": "I"
+      }
+    },
+    {
+      "name": "InvcothButton",
+      "command": "InvCoth",
+      "shortcuts": {
+        "VirtualKeyControlShiftChord": "J"
+      }
+    },
+    {
+      "name": "AbsFlyoutButton",
+      "command": "Abs",
+      "shortcuts": {
+        "Character": "|"
+      }
+    },
+    {
+      "name": "FloorButton",
+      "command": "Floor",
+      "shortcuts": {
+        "Character": "["
+      }
+    },
+    {
+      "name": "CeilButton",
+      "command": "Ceil",
+      "shortcuts": {
+        "Character": "]"
+      }
+    },
+    {
+      "name": "RandButton",
+      "command": "Rand",
+      "shortcuts": {
+        "VirtualKeyShiftChord": "R"
+      }
+    },
+    {
+      "name": "DmsButton",
+      "command": "DMS",
+      "shortcuts": {
+        "VirtualKey": "M"
+      }
+    },
+    {
+      "name": "DegreesButton",
+      "command": "Degrees",
+      "shortcuts": {}
+    },
+    {
+      "name": "PiButton",
+      "command": "Pi",
+      "shortcuts": {
+        "VirtualKey": "P"
+      }
+    },
+    {
+      "name": "EulerButton",
+      "command": "Euler",
+      "shortcuts": {
+        "VirtualKeyShiftChord": "E"
+      }
+    },
+    {
+      "name": "ClearEntryButton",
+      "command": "ClearEntry",
+      "shortcuts": {
+        "VirtualKey": "Delete"
+      }
+    },
+    {
+      "name": "ClearButton",
+      "command": "Clear",
+      "shortcuts": {
+        "VirtualKey": "Escape"
+      }
+    },
+    {
+      "name": "BackSpaceButton",
+      "command": "Backspace",
+      "shortcuts": {
+        "VirtualKey": "Back"
+      }
+    },
+    {
+      "name": "XPower2Button",
+      "command": "XPower2",
+      "shortcuts": {
+        "VirtualKey": "Q"
+      }
+    },
+    {
+      "name": "SquareRootButton",
+      "command": "Sqrt",
+      "shortcuts": {
+        "Character": "@"
+      }
+    },
+    {
+      "name": "PowerButton",
+      "command": "XPowerY",
+      "shortcuts": {
+        "Character": "^",
+        "VirtualKey": "Y"
+      }
+    },
+    {
+      "name": "PowerOf10Button",
+      "command": "TenPowerX",
+      "shortcuts": {
+        "VirtualKeyControlChord": "G"
+      }
+    },
+    {
+      "name": "LogBase10Button",
+      "command": "LogBase10",
+      "shortcuts": {
+        "VirtualKey": "L"
+      }
+    },
+    {
+      "name": "LogBaseEButton",
+      "command": "LogBaseE",
+      "shortcuts": {
+        "VirtualKey": "N"
+      }
+    },
+    {
+      "name": "XPower3Button",
+      "command": "Cube",
+      "shortcuts": {
+        "Character": "#"
+      }
+    },
+    {
+      "name": "CubeRootButton",
+      "command": "CubeRoot",
+      "shortcuts": {
+        "VirtualKey": "B"
+      }
+    },
+    {
+      "name": "YSquareRootButton",
+      "command": "YRootX",
+      "shortcuts": {
+        "VirtualKeyControlChord": "Y"
+      }
+    },
+    {
+      "name": "TwoPowerXButton",
+      "command": "TwoPowerX",
+      "shortcuts": {
+        "VirtualKey": "G"
+      }
+    },
+    {
+      "name": "LogBaseY",
+      "command": "LogBaseY",
+      "shortcuts": {
+        "VirtualKeyShiftChord": "L"
+      }
+    },
+    {
+      "name": "PowerOfEButton",
+      "command": "EPowerX",
+      "shortcuts": {
+        "VirtualKeyControlChord": "N"
+      }
+    },
+    {
+      "name": "InvertButton",
+      "command": "Invert",
+      "shortcuts": {
+        "VirtualKey": "R"
+      }
+    },
+    {
+      "name": "AbsButton",
+      "command": "Abs",
+      "shortcuts": {
+        "Character": "|"
+      }
+    },
+    {
+      "name": "ExpButton",
+      "command": "Exp",
+      "shortcuts": {
+        "VirtualKey": "X"
+      }
+    },
+    {
+      "name": "ModButton",
+      "command": "Mod",
+      "shortcuts": {
+        "Character": "%"
+      }
+    },
+    {
+      "name": "OpenParenthesisButton",
+      "command": "OpenParenthesis",
+      "shortcuts": {
+        "Character": "("
+      }
+    },
+    {
+      "name": "CloseParenthesisButton",
+      "command": "CloseParenthesis",
+      "shortcuts": {
+        "Character": ")"
+      }
+    },
+    {
+      "name": "FactorialButton",
+      "command": "Factorial",
+      "shortcuts": {
+        "Character": "!"
+      }
+    },
+    {
+      "name": "DivideButton",
+      "command": "Divide",
+      "shortcuts": {
+        "Character": "/"
+      }
+    },
+    {
+      "name": "MultiplyButton",
+      "command": "Multiply",
+      "shortcuts": {
+        "Character": "*"
+      }
+    },
+    {
+      "name": "MinusButton",
+      "command": "Subtract",
+      "shortcuts": {
+        "Character": "-"
+      }
+    },
+    {
+      "name": "PlusButton",
+      "command": "Add",
+      "shortcuts": {
+        "Character": "+"
+      }
+    },
+    {
+      "name": "EqualButton",
+      "command": "Equals",
+      "shortcuts": {
+        "Character": "=",
+        "VirtualKey": "Enter"
+      }
+    },
+    {
+      "name": "NegateButton",
+      "command": "Negate",
+      "shortcuts": {
+        "VirtualKey": "F9"
+      }
+    }
+  ],
+  "CalculatorProgrammerRadixOperators.xaml": [
+    {
+      "name": "AndButton",
+      "command": "And",
+      "shortcuts": {
+        "Character": "&"
+      }
+    },
+    {
+      "name": "OrButton",
+      "command": "Or",
+      "shortcuts": {
+        "Character": "|"
+      }
+    },
+    {
+      "name": "NotButton",
+      "command": "Not",
+      "shortcuts": {
+        "Character": "~"
+      }
+    },
+    {
+      "name": "NandButton",
+      "command": "Nand",
+      "shortcuts": {
+        "Character": "."
+      }
+    },
+    {
+      "name": "NorButton",
+      "command": "Nor",
+      "shortcuts": {
+        "Character": "\\"
+      }
+    },
+    {
+      "name": "XorButton",
+      "command": "Xor",
+      "shortcuts": {
+        "Character": "^"
+      }
+    },
+    {
+      "name": "RolButton",
+      "command": "Rol",
+      "shortcuts": {
+        "Character": "<"
+      }
+    },
+    {
+      "name": "RorButton",
+      "command": "Ror",
+      "shortcuts": {
+        "Character": ">"
+      }
+    },
+    {
+      "name": "RolCarryButton",
+      "command": "RolC",
+      "shortcuts": {
+        "Character": "<"
+      }
+    },
+    {
+      "name": "RorCarryButton",
+      "command": "RorC",
+      "shortcuts": {
+        "Character": ">"
+      }
+    },
+    {
+      "name": "LshButton",
+      "command": "Lsh",
+      "shortcuts": {
+        "Character": "<"
+      }
+    },
+    {
+      "name": "RshButton",
+      "command": "Rsh",
+      "shortcuts": {
+        "Character": ">"
+      }
+    },
+    {
+      "name": "LshLogicalButton",
+      "command": "Lsh",
+      "shortcuts": {}
+    },
+    {
+      "name": "RshLogicalButton",
+      "command": "RshL",
+      "shortcuts": {
+        "Character": ">"
+      }
+    },
+    {
+      "name": "ClearButton",
+      "command": "Clear",
+      "shortcuts": {
+        "VirtualKey": "Escape"
+      }
+    },
+    {
+      "name": "ClearEntryButton",
+      "command": "ClearEntry",
+      "shortcuts": {
+        "VirtualKey": "Delete"
+      }
+    },
+    {
+      "name": "BackSpaceButton",
+      "command": "Backspace",
+      "shortcuts": {
+        "VirtualKey": "Back"
+      }
+    },
+    {
+      "name": "OpenParenthesisButton",
+      "command": "OpenParenthesis",
+      "shortcuts": {
+        "Character": "("
+      }
+    },
+    {
+      "name": "CloseParenthesisButton",
+      "command": "CloseParenthesis",
+      "shortcuts": {
+        "Character": ")"
+      }
+    },
+    {
+      "name": "ModButton",
+      "command": "Mod",
+      "shortcuts": {
+        "Character": "%"
+      }
+    },
+    {
+      "name": "DivideButton",
+      "command": "Divide",
+      "shortcuts": {
+        "Character": "/"
+      }
+    },
+    {
+      "name": "MultiplyButton",
+      "command": "Multiply",
+      "shortcuts": {
+        "Character": "*"
+      }
+    },
+    {
+      "name": "MinusButton",
+      "command": "Subtract",
+      "shortcuts": {
+        "Character": "-"
+      }
+    },
+    {
+      "name": "PlusButton",
+      "command": "Add",
+      "shortcuts": {
+        "Character": "+"
+      }
+    },
+    {
+      "name": "EqualButton",
+      "command": "Equals",
+      "shortcuts": {
+        "Character": "=",
+        "VirtualKey": "Enter"
+      }
+    },
+    {
+      "name": "AButton",
+      "command": "A",
+      "shortcuts": {
+        "VirtualKey": "A",
+        "VirtualKeyShiftChord": "A"
+      }
+    },
+    {
+      "name": "BButton",
+      "command": "B",
+      "shortcuts": {
+        "VirtualKey": "B",
+        "VirtualKeyShiftChord": "B"
+      }
+    },
+    {
+      "name": "CButton",
+      "command": "C",
+      "shortcuts": {
+        "VirtualKey": "C",
+        "VirtualKeyShiftChord": "C"
+      }
+    },
+    {
+      "name": "DButton",
+      "command": "D",
+      "shortcuts": {
+        "VirtualKey": "D",
+        "VirtualKeyShiftChord": "D"
+      }
+    },
+    {
+      "name": "EButton",
+      "command": "E",
+      "shortcuts": {
+        "VirtualKey": "E",
+        "VirtualKeyShiftChord": "E"
+      }
+    },
+    {
+      "name": "FButton",
+      "command": "F",
+      "shortcuts": {
+        "VirtualKey": "F",
+        "VirtualKeyShiftChord": "F"
+      }
+    },
+    {
+      "name": "NegateButton",
+      "command": "Negate",
+      "shortcuts": {
+        "VirtualKey": "F9"
+      }
+    }
+  ]
+}

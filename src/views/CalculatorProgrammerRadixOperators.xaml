@@ -1,0 +1,154 @@
+<!-- Adapted from upstream/calculator/src/Calculator/Views/CalculatorProgrammerRadixOperators.xaml; see docs/xaml-adaptations.json. -->
+<UserControl xmlns="https://github.com/ferroui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="ControlRoot">
+    <Grid x:Name="ProgRadixOps" FlowDirection="LeftToRight">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="0" />
+        </Grid.ColumnDefinitions>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="ErrorVisualStates">
+                <VisualState x:Name="NoErrorLayout" />
+                <VisualState x:Name="ErrorLayout">
+                    <VisualState.Setters>
+                        <Setter Target="RolButton.IsEnabled" Value="False" />
+                        <Setter Target="RorButton.IsEnabled" Value="False" />
+                        <Setter Target="LshButton.IsEnabled" Value="False" />
+                        <Setter Target="RshButton.IsEnabled" Value="False" />
+                        <Setter Target="OrButton.IsEnabled" Value="False" />
+                        <Setter Target="XorButton.IsEnabled" Value="False" />
+                        <Setter Target="NotButton.IsEnabled" Value="False" />
+                        <Setter Target="AndButton.IsEnabled" Value="False" />
+                        <Setter Target="ModButton.IsEnabled" Value="False" />
+                        <Setter Target="DivideButton.IsEnabled" Value="False" />
+                        <Setter Target="MultiplyButton.IsEnabled" Value="False" />
+                        <Setter Target="MinusButton.IsEnabled" Value="False" />
+                        <Setter Target="PlusButton.IsEnabled" Value="False" />
+                        <Setter Target="OpenParenthesisButton.IsEnabled" Value="False" />
+                        <Setter Target="CloseParenthesisButton.IsEnabled" Value="False" />
+                        <Setter Target="NegateButton.IsEnabled" Value="False" />
+                        <Setter Target="BitShiftButton.IsEnabled" Value="False" />
+                        <Setter Target="BitwiseButton.IsEnabled" Value="False" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <StackPanel Orientation="Horizontal" Grid.ColumnSpan="6" AutomationProperties.Name="Programmer operator panels">
+            <Button Classes="calc caption" x:Name="BitwiseButton" AutomationProperties.AutomationId="bitwiseButton" AutomationProperties.Name="Bitwise" Content="Bitwise ▾">
+                <Button.Flyout>
+                    <Flyout>
+                        <Grid x:Name="BitwiseGrid" MinWidth="258" MinHeight="96" FlowDirection="LeftToRight">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*" />
+                                <RowDefinition Height="1*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                            </Grid.ColumnDefinitions>
+                            <Button Classes="calc" Tag="And" x:Name="AndButton" FontSize="12" AutomationProperties.AutomationId="andButton" AutomationProperties.Name="And" Content="AND" />
+                            <Button Classes="calc" Tag="Or" x:Name="OrButton" Grid.Column="1" FontSize="12" AutomationProperties.AutomationId="orButton" AutomationProperties.Name="Or" Content="OR" />
+                            <Button Classes="calc" Tag="Not" x:Name="NotButton" Grid.Column="2" FontSize="12" AutomationProperties.AutomationId="notButton" AutomationProperties.Name="Not" Content="NOT" />
+                            <Button Classes="calc" Tag="Nand" x:Name="NandButton" Grid.Row="1" FontSize="12" AutomationProperties.AutomationId="nandButton" AutomationProperties.Name="Nand" Content="NAND" />
+                            <Button Classes="calc" Tag="Nor" x:Name="NorButton" Grid.Row="1" Grid.Column="1" FontSize="12" AutomationProperties.AutomationId="norButton" AutomationProperties.Name="Nor" Content="NOR" />
+                            <Button Classes="calc" Tag="Xor" x:Name="XorButton" Grid.Row="1" Grid.Column="2" FontSize="12" AutomationProperties.AutomationId="xorButton" AutomationProperties.Name="Exclusive or" Content="XOR" />
+                        </Grid>
+                    </Flyout>
+                </Button.Flyout>
+            </Button>
+            <Button Classes="calc caption" x:Name="BitShiftButton" AutomationProperties.AutomationId="bitShiftButton" AutomationProperties.Name="Bitshift" Content="Bit shift ▾">
+                <Button.Flyout>
+                    <Flyout>
+                        <Border Padding="12" MaxWidth="192">
+                            <StackPanel>
+                                <RadioButton Classes="calc caption" x:Name="ArithmeticShiftButton" AutomationProperties.AutomationId="arithmeticShiftButton" Content="Arithmetic shift" />
+                                <RadioButton Classes="calc caption" x:Name="LogicalShiftButton" AutomationProperties.AutomationId="logicalShiftButton" Content="Logical shift" />
+                                <RadioButton Classes="calc caption" x:Name="RotateCircularButton" AutomationProperties.AutomationId="rotateCircularButton" Content="Rotate circular shift" />
+                                <RadioButton Classes="calc caption" x:Name="RotateCarryShiftButton" AutomationProperties.AutomationId="rotateCarryShiftButton" Content="Rotate through carry circular shift" />
+                            </StackPanel>
+                        </Border>
+                    </Flyout>
+                </Button.Flyout>
+            </Button>
+        </StackPanel>
+        <Grid Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" AutomationProperties.Name="Programmer operators">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Button Classes="calc symbol" Tag="Rol" x:Name="RolButton" Grid.Column="0" FontSize="12" AutomationProperties.AutomationId="rolButton" AutomationProperties.Name="Rotate on left" Content="" IsVisible="False" />
+            <Button Classes="calc symbol" Tag="Ror" x:Name="RorButton" Grid.Column="1" FontSize="12" AutomationProperties.AutomationId="rorButton" AutomationProperties.Name="Rotate on right" Content="" IsVisible="False" />
+            <Button Classes="calc symbol" Tag="RolC" x:Name="RolCarryButton" FontSize="12" AutomationProperties.AutomationId="rolButton" AutomationProperties.Name="Rotate on left with carry" Content="" IsVisible="False" />
+            <Button Classes="calc symbol" Tag="RorC" x:Name="RorCarryButton" Grid.Column="1" FontSize="12" AutomationProperties.AutomationId="rorCarryButton" AutomationProperties.Name="Rotate on right with carry" Content="" IsVisible="False" />
+            <Button Classes="calc symbol" Tag="Lsh" x:Name="LshButton" FontSize="12" AutomationProperties.AutomationId="lshButton" AutomationProperties.Name="Left shift" Content="" />
+            <Button Classes="calc symbol" Tag="Rsh" x:Name="RshButton" Grid.Column="1" FontSize="12" AutomationProperties.AutomationId="rshButton" AutomationProperties.Name="Right shift" Content="" />
+            <Button Classes="calc symbol" Tag="Lsh" x:Name="LshLogicalButton" FontSize="12" AutomationProperties.AutomationId="lshLogicalButton" Content="" IsVisible="False" />
+            <Button Classes="calc symbol" Tag="RshL" x:Name="RshLogicalButton" Grid.Column="1" FontSize="12" AutomationProperties.AutomationId="rshLogicalButton" AutomationProperties.Name="Right shift" Content="" IsVisible="False" />
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2" AutomationProperties.Name="Display controls">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Button Classes="calc" Tag="Clear" x:Name="ClearButton" FontSize="12" AutomationProperties.AutomationId="clearButton" AutomationProperties.Name="Clear" Content="C" />
+            <Button Classes="calc" Tag="ClearEntry" x:Name="ClearEntryButton" FontSize="12" AutomationProperties.AutomationId="clearEntryButton" AutomationProperties.Name="Clear entry" Content="CE" />
+            <Button Classes="calc symbol" Tag="Backspace" x:Name="BackSpaceButton" Grid.Column="1" FontSize="12" AutomationProperties.AutomationId="backSpaceButton" AutomationProperties.Name="Backspace" Content="" />
+        </Grid>
+        <Button Classes="calc" Tag="OpenParenthesis" x:Name="OpenParenthesisButton" Grid.Row="2" Grid.Column="2" FontSize="18" AutomationProperties.AutomationId="openParenthesisButton" AutomationProperties.Name="Left parenthesis" Content="(" />
+        <Button Classes="calc" Tag="CloseParenthesis" x:Name="CloseParenthesisButton" Grid.Row="2" Grid.Column="3" FontSize="18" AutomationProperties.AutomationId="closeParenthesisButton" AutomationProperties.Name="Right parenthesis" Content=")" />
+        <Button Classes="calc" Tag="Mod" x:Name="ModButton" Grid.Row="2" Grid.Column="4" FontSize="12" AutomationProperties.AutomationId="modButton" AutomationProperties.Name="Modulo" Content="%" />
+        <Grid Grid.Row="2" Grid.RowSpan="5" Grid.Column="5" AutomationProperties.Name="Standard operators">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Button Classes="calc symbol" Tag="Divide" x:Name="DivideButton" Grid.Row="0" FontSize="12" AutomationProperties.AutomationId="divideButton" AutomationProperties.Name="Divide by" Content="" />
+            <Button Classes="calc symbol" Tag="Multiply" x:Name="MultiplyButton" Grid.Row="1" FontSize="12" AutomationProperties.AutomationId="multiplyButton" AutomationProperties.Name="Multiply by" Content="" />
+            <Button Classes="calc symbol" Tag="Subtract" x:Name="MinusButton" Grid.Row="2" FontSize="12" AutomationProperties.AutomationId="minusButton" AutomationProperties.Name="Minus" Content="" />
+            <Button Classes="calc symbol" Tag="Add" x:Name="PlusButton" Grid.Row="3" FontSize="12" AutomationProperties.AutomationId="plusButton" AutomationProperties.Name="Plus" Content="" />
+            <Button Classes="calc symbol equals" Tag="Equals" x:Name="EqualButton" Grid.Row="4" FontSize="12" AutomationProperties.AutomationId="equalButton" AutomationProperties.Name="Equals" Content="" />
+        </Grid>
+        <Grid Grid.Row="1" Grid.RowSpan="6" Grid.Column="1" Grid.ColumnSpan="5" AutomationProperties.AutomationId="NumberPad" AutomationProperties.Name="Number pad">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Button Classes="calc numeric" Tag="A" x:Name="AButton" Grid.Row="0" Grid.Column="0" AutomationProperties.AutomationId="aButton" AutomationProperties.Name="A" Content="A" />
+            <Button Classes="calc numeric" Tag="B" x:Name="BButton" Grid.Row="1" Grid.Column="0" AutomationProperties.AutomationId="bButton" AutomationProperties.Name="B" Content="B" />
+            <Button Classes="calc numeric" Tag="C" x:Name="CButton" Grid.Row="2" Grid.Column="0" AutomationProperties.AutomationId="cButton" AutomationProperties.Name="C" Content="C" />
+            <Button Classes="calc numeric" Tag="D" x:Name="DButton" Grid.Row="3" Grid.Column="0" AutomationProperties.AutomationId="dButton" AutomationProperties.Name="D" Content="D" />
+            <Button Classes="calc numeric" Tag="E" x:Name="EButton" Grid.Row="4" Grid.Column="0" AutomationProperties.AutomationId="eButton" AutomationProperties.Name="E" Content="E" />
+            <Button Classes="calc numeric" Tag="F" x:Name="FButton" Grid.Row="5" Grid.Column="0" AutomationProperties.AutomationId="fButton" AutomationProperties.Name="F" Content="F" />
+            <ContentControl x:Name="NumberPad" Grid.Row="2" Grid.RowSpan="4" Grid.Column="1" Grid.ColumnSpan="3" />
+        </Grid>
+        <Button Classes="calc symbol" Tag="Negate" x:Name="NegateButton" Grid.Row="6" Grid.Column="2" FontSize="12" FontWeight="Normal" AutomationProperties.AutomationId="negateButton" AutomationProperties.Name="Positive negative" Content="" />
+    </Grid>
+</UserControl>
