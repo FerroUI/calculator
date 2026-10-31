@@ -4,30 +4,41 @@ An initial native FerroUI port of [Microsoft Calculator](https://github.com/micr
 
 Standard, Scientific and Programmer calculators, history and multi-item memory, bit toggling, Gregorian date calculations, all twelve physical-unit categories and upstream's explicitly fictional currency rates work. This is a working core port, **not yet a claim of complete application or visual parity**. Session persistence, the full original shell/list interactions, all adaptive layouts, graph UI integration and effect fidelity still have open work.
 
-The running calculator uses the original CalculatorIcons.ttf and original keypad grids, names, command IDs and glyphs. Light/dark colours and native Reveal/Acrylic brush recipes come from App.xaml. The shell now uses FerroUI's native NavigationView and the window requests a Mica backdrop. Key hover/press uses native Reveal with platform policy fallbacks. The source's 1-DIP Reveal borders are retained, but the neighboring-edge glow has a failing rendering reproducer on pinned FerroUI/Skia (MATERIAL-01). Five keypad documents are mechanically adapted and checked for reproducibility; the shell, calculator wrapper, date and converter views remain manual adaptations. The complete original XAML remains in the upstream submodule.
+The running calculator uses the original CalculatorIcons.ttf and original keypad grids, names, command IDs and glyphs. Light/dark colours and native Reveal/Acrylic brush recipes come from App.xaml. The shell now uses FerroUI's native NavigationView and the window requests a Mica backdrop. Key hover/press uses native Reveal with platform policy fallbacks. The source's 1-DIP Reveal borders are retained, and the light spreads across the borders of neighbouring keys (MATERIAL-01, fixed in FerroUI). Five keypad documents are mechanically adapted and checked for reproducibility; the shell, calculator wrapper, date and converter views remain manual adaptations. The complete original XAML remains in the upstream submodule.
 
 The pinned Calculator's modern key template uses solid fills. For the requested Reveal appearance, the port follows the [older Fluent CalcButtonStyle](https://github.com/microsoft/calculator/blob/6f49b17bf099c10830c15ea93e1207068896045b/src/Calculator/App.xaml#L142): a RootGrid that switches to a Reveal background on hover/press, and a ContentPresenter with a 1-DIP Reveal border. Both use modern 4-DIP rounded corners. There is no extra keypad backplate overlay or Calculator-specific gap mask. Modern default fills and the engine/keypad revision remain pinned; this version difference is explicitly tracked. Programmer radix rows use the original separate radio-row structure and subtle hover fills.
 
-A separately exported [FerroUI Reveal patch series](patches/ferroui-reveal-lighting.patch) corrects both the border-light expression lifetime and a thread-local light registry that lost lights across native rendering threads. With both fixes, the neighbouring-border pixel reproducer and independent numeric/operator surface-lighting checks pass; the user also confirmed the spreading border light in the rebuilt native window. The application's Git dependency remains unchanged pending upstream adoption. Text font availability and remaining substitute shell icons are tracked in [APP-06](docs/FERROUI-GAPS.md).
+The two FerroUI defects that kept the neighbouring borders dark, the border light's expression lifetime and a thread-local light registry that lost lights across native rendering threads, are fixed in the FerroUI that the submodule pins. Text font availability and remaining substitute shell icons are tracked in [APP-06](docs/FERROUI-GAPS.md).
+
+## Repository layout
+
+| Path | Content |
+|---|---|
+| `src/`, `build.rs`, `native/` | the calculator (`ferro-calculator`): the views and their adapted XAML, the Rust engine adapter, and the C++ bridge and platform headers through which `build.rs` compiles the original engine |
+| `upstream/calculator/` | [Microsoft Calculator](https://github.com/microsoft/calculator) as a git submodule at `79e1ac53`, unmodified |
+| `FerroUI/` | [FerroUI](https://github.com/wieslawsoltes/FerroUI) as a git submodule; the calculator builds against its crates |
+| `tests/` | the engine, date and UI tests |
+| `scripts/`, `docs/` | the preservation and regeneration scripts, the porting notes and the compatibility tracker |
+
+The repository follows the layout of FerroUI applications described in
+[FerroUI/docs/apps.md](https://github.com/wieslawsoltes/FerroUI/blob/main/docs/apps.md): the workspace
+dependencies and profiles of `Cargo.toml` are kept in step with the submodule by
+`FerroUI/scripts/apps/sync-workspace.py`, and the CI is FerroUI's shared application workflow.
 
 ## Build and run
 
-Requirements: Rust 1.89 or newer, Git and a C++17 toolchain. macOS needs Xcode command-line tools; Windows needs Visual Studio C++ tools and the Windows SDK; Linux needs the desktop build dependencies documented by [FerroUI](https://github.com/wieslawsoltes/FerroUI). Skia/native backend prerequisites are FerroUI's, and Cargo builds them. CMake is not required by this application.
+Requirements: Rust 1.89 or newer, Git, Python 3 and a C++17 toolchain, with the platform prerequisites of FerroUI: the Xcode command line tools on macOS; a C/C++ compiler, pkg-config, fontconfig and FreeType development packages on Linux; Visual Studio C++ tools and the Windows SDK on Windows. The first build downloads Skia binaries and builds HarfBuzz. CMake is not required.
 
 ```sh
+git clone https://github.com/FerroUI/calculator.git
+cd calculator
 git -c core.autocrlf=false submodule update --init --recursive
-cargo run --locked
-cargo run --locked -- --scientific
-cargo run --locked -- --programmer --dark
+cargo run --locked --profile fast-release
+cargo run --locked --profile fast-release -- --scientific
+cargo run --locked --profile fast-release -- --programmer --dark
 ```
 
-Both upstream projects are pinned: Calculator `79e1ac53` as a Git submodule, FerroUI main `62b48431` (audited 2026-10-31) in Cargo.toml/Cargo.lock. Normal builds have no dependency on a sibling local checkout; local patched verification builds use an external Cargo override.
-
-When space is limited, use a build directory on another volume:
-
-```sh
-CARGO_TARGET_DIR=/tmp/ferrocalc-target cargo run --locked
-```
+Check out the submodules with `core.autocrlf=false`, as above, so that the original sources keep their line endings and the byte-for-byte preservation check also holds on Windows. Calculator is pinned at `79e1ac53` and FerroUI at a commit of its main branch, or of a FerroUI pull request while the calculator needs a change that is not merged yet; to move FerroUI forward, see section 7 of FerroUI/docs/apps.md.
 
 ## Verify
 
@@ -35,18 +46,17 @@ CARGO_TARGET_DIR=/tmp/ferrocalc-target cargo run --locked
 python3 scripts/verify_upstream.py
 python3 scripts/generate_engine_resources.py --check
 python3 scripts/port_xaml.py --check
+python3 FerroUI/scripts/apps/sync-workspace.py --check
 cargo fmt --check
 cargo test --locked --no-default-features
-cargo test --locked --features headless --test ui -- --test-threads=1
-FERRO_CALC_CAPTURE_DIR=artifacts cargo test --locked --features headless --test ui -- --test-threads=1
+cargo test --locked --features headless --test ui --test reveal_gap -- --test-threads=1
+FERRO_CALC_CAPTURE_DIR=artifacts cargo test --locked --features headless --test ui --test reveal_gap -- --test-threads=1
 FERROUI_SMOKE_EXIT_MS=1500 cargo run --locked -- --scientific --dark
 ```
 
-The core tests exercise decimal precision beyond f64, standard versus scientific evaluation, functions, integer widths and signed overflow, bases, bit toggling, native history replay, memory, original conversion ratios/offsets, mock currency, paste validation and date boundaries. The UI test loads every ported view, opens a real flyout, drives keyboard/pointer routing, exercises native NavigationView and Settings selection, checks original error visual states and dates, switches themes and exports actual compositor frames. It checks that Reveal changes as the pointer moves inside one key, and becomes a stable solid fallback when material policy disables effects. It uses FerroUI headless plus Skia, not a replacement UI renderer.
+The core tests exercise decimal precision beyond f64, standard versus scientific evaluation, functions, integer widths and signed overflow, bases, bit toggling, native history replay, memory, original conversion ratios/offsets, mock currency, paste validation and date boundaries. The UI test loads every ported view, opens a real flyout, drives keyboard/pointer routing, exercises native NavigationView and Settings selection, checks original error visual states and dates, switches themes and exports actual compositor frames. It checks that Reveal changes as the pointer moves inside one key, and becomes a stable solid fallback when material policy disables effects. `tests/reveal_gap.rs` checks that both unhovered neighbours light their borders when the pointer is in the gap between two keys. The UI tests use FerroUI headless plus Skia, not a replacement UI renderer; each test file runs in a process of its own.
 
-The separate gap-border pixel reproducer is explicitly ignored in the ordinary suite until MATERIAL-01 is resolved. It currently fails on pinned FerroUI/Skia and can be run with `cargo test --locked --features headless --test ui reveal_gap_lights_both_unhovered_neighbor_borders -- --ignored --test-threads=1`. Passing the hover tests does not close this rendering gap.
-
-CI is configured to run engine checks on macOS, Linux and Windows and render the UI on macOS. Local verification is on macOS; the other platforms are not claimed as locally tested.
+CI runs all of the above on Linux, the UI tests under a virtual X server. Local verification is on macOS; Windows is not claimed as tested.
 
 ## Fidelity and missing framework features
 
