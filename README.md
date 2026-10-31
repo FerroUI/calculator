@@ -1,6 +1,8 @@
 # Ferro Calculator
 
-An initial native FerroUI port of [Microsoft Calculator](https://github.com/microsoft/calculator). **The original C++ CalcManager, CEngine and Ratpack sources are compiled unchanged.** Rust supplies platform adapters and view code-behind; FerroUI loads the calculator's adapted XAML.
+An initial native FerroUI port of [Microsoft Calculator](https://github.com/microsoft/calculator). **The original C++ CalcManager, CEngine and Ratpack sources are compiled unchanged.** Rust supplies platform adapters and view code-behind; FerroUI loads the calculator's adapted XAML. It runs natively on the desktop and in the browser, where the original engine is compiled to WebAssembly with the rest of the application.
+
+**Try it in the browser:** https://ferroui.github.io/calculator/
 
 Standard, Scientific and Programmer calculators, history and multi-item memory, bit toggling, Gregorian date calculations, all twelve physical-unit categories and upstream's explicitly fictional currency rates work. This is a working core port, **not yet a claim of complete application or visual parity**. Session persistence, the full original shell/list interactions, all adaptive layouts, graph UI integration and effect fidelity still have open work.
 
@@ -15,6 +17,7 @@ The two FerroUI defects that kept the neighbouring borders dark, the border ligh
 | Path | Content |
 |---|---|
 | `src/`, `build.rs`, `native/` | the calculator (`ferro-calculator`): the views and their adapted XAML, the Rust engine adapter, and the C++ bridge and platform headers through which `build.rs` compiles the original engine |
+| `Calculator.Browser/` | the browser host (`ferro-calculator-browser`): the WebAssembly entry point and its host page in `wwwroot/` |
 | `upstream/calculator/` | [Microsoft Calculator](https://github.com/microsoft/calculator) as a git submodule at `79e1ac53`, unmodified |
 | `FerroUI/` | [FerroUI](https://github.com/wieslawsoltes/FerroUI) as a git submodule; the calculator builds against its crates |
 | `tests/` | the engine, date and UI tests |
@@ -40,6 +43,17 @@ cargo run --locked --profile fast-release -- --programmer --dark
 
 Check out the submodules with `core.autocrlf=false`, as above, so that the original sources keep their line endings and the byte-for-byte preservation check also holds on Windows. Calculator is pinned at `79e1ac53` and FerroUI at a commit of its main branch, or of a FerroUI pull request while the calculator needs a change that is not merged yet; to move FerroUI forward, see section 7 of FerroUI/docs/apps.md.
 
+### Browser
+
+With the pinned browser toolchain of FerroUI (`FerroUI/scripts/browser/setup.sh`), whose em++ also compiles the original engine:
+
+```sh
+source ~/browser-tools/env.sh
+FERROUI_BROWSER_WORKSPACE=$PWD FerroUI/scripts/build-browser.sh ferro-calculator-browser
+```
+
+Serve `target/browser/ferro-calculator-browser` with any static web server. The query string opens another page or theme (`?scientific`, `?programmer`, `?dark`) or selects the renderer (`?RenderingMode=Software2D`).
+
 ## Verify
 
 ```sh
@@ -56,7 +70,7 @@ FERROUI_SMOKE_EXIT_MS=1500 cargo run --locked -- --scientific --dark
 
 The core tests exercise decimal precision beyond f64, standard versus scientific evaluation, functions, integer widths and signed overflow, bases, bit toggling, native history replay, memory, original conversion ratios/offsets, mock currency, paste validation and date boundaries. The UI test loads every ported view, opens a real flyout, drives keyboard/pointer routing, exercises native NavigationView and Settings selection, checks original error visual states and dates, switches themes and exports actual compositor frames. It checks that Reveal changes as the pointer moves inside one key, and becomes a stable solid fallback when material policy disables effects. `tests/reveal_gap.rs` checks that both unhovered neighbours light their borders when the pointer is in the gap between two keys. The UI tests use FerroUI headless plus Skia, not a replacement UI renderer; each test file runs in a process of its own.
 
-CI runs all of the above on Linux, the UI tests under a virtual X server. Local verification is on macOS; Windows is not claimed as tested.
+CI runs all of the above on Linux, the UI tests under a virtual X server, then builds the browser site, opens it in headless Chrome and publishes it to GitHub Pages from main. Local verification is on macOS; Windows is not claimed as tested.
 
 ## Fidelity and missing framework features
 

@@ -403,6 +403,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "ferro-calculator-browser"
+version = "0.1.0"
+dependencies = [
+ "ferro-calculator",
+ "ferroui-base",
+ "ferroui-browser",
+ "ferroui-controls",
+ "ferroui-fonts-inter",
+ "wasm-bindgen",
+]
+
+[[package]]
 name = "ferroui"
 version = "0.4.0"
 dependencies = [
@@ -434,6 +446,18 @@ dependencies = [
  "rustc-hash",
  "smallvec",
  "time",
+]
+
+[[package]]
+name = "ferroui-browser"
+version = "0.4.0"
+dependencies = [
+ "ferroui-base",
+ "ferroui-controls",
+ "ferroui-harfbuzz",
+ "ferroui-opengl",
+ "ferroui-skia",
+ "wasm-bindgen",
 ]
 
 [[package]]
@@ -491,6 +515,14 @@ dependencies = [
  "ferroui-controls",
  "ferroui-markup-xaml",
  "sysinfo",
+]
+
+[[package]]
+name = "ferroui-fonts-inter"
+version = "0.4.0"
+dependencies = [
+ "ferroui-base",
+ "ferroui-controls",
 ]
 
 [[package]]

@@ -1,0 +1,27 @@
+[package]
+name = "ferro-calculator-browser"
+description = "The browser host of Ferro Calculator: the calculator and its original C++ engine as a WebAssembly module on a canvas"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+publish = false
+autotests = false
+autobenches = false
+autoexamples = false
+
+# A binary: the Emscripten target links wasm-bindgen exports only into executables. The host page
+# (wwwroot/) creates the module and calls `runMain`; FerroUI/scripts/build-browser.sh with
+# FERROUI_BROWSER_WORKSPACE assembles the site (FerroUI/docs/apps.md).
+[[bin]]
+name = "ferro-calculator-browser"
+path = "program.rs"
+
+[dependencies]
+ferro-calculator = { path = "..", default-features = false, features = ["ui"] }
+ferroui-base = { workspace = true }
+ferroui-controls = { workspace = true }
+ferroui-browser = { workspace = true }
+ferroui-fonts-inter = { workspace = true }
+wasm-bindgen = { workspace = true }

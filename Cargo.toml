@@ -10,6 +10,7 @@ description = "Microsoft Calculator port for FerroUI, using the original C++ eng
 
 [workspace]
 resolver = "2"
+members = ["Calculator.Browser"]
 # The framework crates belong to the workspace of the submodule (FerroUI/docs/apps.md); the
 # original Calculator sources are compiled by build.rs.
 exclude = ["FerroUI", "upstream"]

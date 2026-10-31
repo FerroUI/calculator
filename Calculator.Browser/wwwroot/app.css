@@ -1,0 +1,17 @@
+/* Only the loading and error surfaces are HTML; the calculator itself is FerroUI on a canvas. */
+:root { color-scheme: light dark; font-family: "Segoe UI Variable", "Segoe UI", system-ui, sans-serif; --page: #f3f3f3; --text: #1b1b1b; --muted: #5d5d5d; --track: #dcdcdc; --accent: #005fb8; }
+@media (prefers-color-scheme: dark) { :root { --page: #202020; --text: #ffffff; --muted: #c5c5c5; --track: #3a3a3a; --accent: #60cdff; } }
+html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background: var(--page); }
+#out { position: relative; width: 100%; height: 100%; height: 100dvh; }
+.ferroui-splash, .boot-error { box-sizing: border-box; position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 32px; background: var(--page); color: var(--text); text-align: center; }
+.ferroui-splash { pointer-events: none; }
+.ferroui-splash h1 { font-size: 28px; font-weight: 600; margin: 16px 0 4px; }
+.ferroui-splash p { color: var(--muted); margin: 8px 0 28px; }
+.loading-line { width: 96px; height: 3px; border-radius: 3px; background: var(--track); overflow: hidden; }
+.loading-line::after { content: ""; display: block; width: 50%; height: 100%; border-radius: inherit; background: var(--accent); animation: loading 1.2s ease-in-out infinite alternate; }
+.ferroui-splash.splash-close { display: none; }
+.boot-error h1 { font-size: 24px; }
+.boot-error p { max-width: 500px; line-height: 1.6; overflow-wrap: anywhere; }
+.boot-error button { border: 0; background: var(--accent); color: #ffffff; padding: 12px 24px; min-height: 48px; border-radius: 4px; font: inherit; cursor: pointer; }
+@keyframes loading { from { transform: translateX(-60%); } to { transform: translateX(160%); } }
+@media (prefers-reduced-motion: reduce) { .loading-line::after { animation: none; width: 100%; } }

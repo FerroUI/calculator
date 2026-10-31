@@ -20,5 +20,10 @@
 #include <tuple>
 #include <unordered_map>
 #include <vector>
+#if defined(__wasm__) && !defined(MIDL_PASS)
+// Ratpack/conv.cpp lists the architectures it knows, which predate WebAssembly; MIDL_PASS selects
+// its portable 64-bit product. The macro has no other use in the compiled sources.
+#define MIDL_PASS 1
+#endif
 #include "sal_cross_platform.h"
 #include "winerror_cross_platform.h"

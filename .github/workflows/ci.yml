@@ -1,8 +1,8 @@
 name: CI
 
-# Build and tests, with the shared workflow of FerroUI (FerroUI/docs/apps.md). The checkout includes
-# both submodules: FerroUI and the original Microsoft Calculator sources, whose engine build.rs
-# compiles.
+# Build, tests, the browser site and its GitHub Pages deployment, with the shared workflow of
+# FerroUI (FerroUI/docs/apps.md). The checkout includes both submodules: FerroUI and the original
+# Microsoft Calculator sources, whose engine build.rs compiles.
 
 on:
   push:
@@ -39,3 +39,4 @@ jobs:
         python3 scripts/port_xaml.py --check
         rustup component add rustfmt
         cargo fmt --check
+      browser-package: ferro-calculator-browser

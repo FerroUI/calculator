@@ -1,5 +1,6 @@
 //! Code-behind adaptation for the original Calculator input view.
 use super::main_page::*;
+use ferroui::controls::TopLevel;
 
 impl MainPage {
     pub fn attach(self: &Rc<Self>, window: &Ref<Window>) {
@@ -7,9 +8,18 @@ impl MainPage {
         window.closed(move || {
             let _keep_alive = &this;
         });
+        self.attach_input(window);
+    }
+    /// The single-view host (the browser): the keys of the view itself. The page owns the view
+    /// for as long as it is open.
+    pub fn attach_to_view(self: &Rc<Self>) {
+        self.root.set_focusable(true);
+        self.attach_input(&self.root);
+        std::mem::forget(self.clone());
+    }
+    fn attach_input(self: &Rc<Self>, target: &InputElement) {
         let weak = Rc::downgrade(self);
-        let weak_window = window.downgrade();
-        window.add_handler_with(
+        target.add_handler_with(
             InputElement::key_down_event(),
             move |_, event| {
                 if let Some(this) = weak.upgrade() {
@@ -34,7 +44,9 @@ impl MainPage {
                         .key_modifiers
                         .intersects(KeyModifiers::CONTROL | KeyModifiers::META);
                     if modified && matches!(event.key, Key::C | Key::V) {
-                        if let Some(clipboard) = weak_window.upgrade().and_then(|w| w.clipboard()) {
+                        if let Some(clipboard) =
+                            TopLevel::get_top_level(Some(&this.root)).and_then(|t| t.clipboard())
+                        {
                             let weak = Rc::downgrade(&this);
                             let copy = event.key == Key::C;
                             ferroui::base::threading::Dispatcher::ui_thread()
@@ -121,7 +133,7 @@ impl MainPage {
             false,
         );
         let weak = Rc::downgrade(self);
-        window.add_handler(
+        target.add_handler(
             InputElement::text_input_event(),
             move |_, event: &TextInputEventArgs| {
                 if let Some(this) = weak.upgrade() {

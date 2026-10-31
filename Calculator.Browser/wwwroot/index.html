@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content">
+    <meta name="theme-color" content="#f3f3f3" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#202020" media="(prefers-color-scheme: dark)">
+    <meta name="description" content="Microsoft Calculator ported to FerroUI and Rust, with the original C++ calculation engine, running as WebAssembly.">
+    <title>Ferro Calculator</title>
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+    <link rel="stylesheet" href="./app.css">
+</head>
+<body>
+    <main id="out" aria-label="Ferro Calculator">
+        <div class="ferroui-splash" role="status">
+            <img src="./favicon.svg" width="64" height="64" alt="">
+            <h1>Ferro Calculator</h1>
+            <p>Standard, Scientific and Programmer</p>
+            <span class="loading-line" aria-hidden="true"></span>
+        </div>
+    </main>
+    <script type="module" src="./main.js"></script>
+</body>
+</html>

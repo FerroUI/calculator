@@ -14,6 +14,11 @@ fn main() {
         .include(&engine)
         .include(engine.join("Header Files"))
         .include(engine.join("Ratpack"));
+    // The browser module unwinds with WebAssembly exceptions (Rust 1.93 and later links with
+    // -fwasm-exceptions), and the engine reports errors such as a division by zero by throwing.
+    if env::var("CARGO_CFG_TARGET_OS").is_ok_and(|v| v == "emscripten") {
+        build.flag("-fwasm-exceptions");
+    }
     // Supply platform headers outside the original source tree. MSVC uses its SDK.
     if !env::var("CARGO_CFG_TARGET_ENV").is_ok_and(|v| v == "msvc") {
         build.include("native/compat");
