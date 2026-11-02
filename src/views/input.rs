@@ -7,7 +7,7 @@ impl MainPage {
         let this = self.clone();
         window.closed(move || {
             let _keep_alive = &this;
-        });
+        }).detach();
         self.attach_input(window);
     }
     /// The single-view host (the browser): the keys of the view itself. The page owns the view

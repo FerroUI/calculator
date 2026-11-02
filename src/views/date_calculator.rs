@@ -17,7 +17,7 @@ impl MainPage {
                 if let Some(this) = weak.upgrade() {
                     this.refresh();
                 }
-            });
+            }).detach();
         }
         for name in ["DateCalculationOption", "AddSubtract"] {
             let weak = Rc::downgrade(self);

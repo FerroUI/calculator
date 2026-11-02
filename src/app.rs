@@ -128,7 +128,7 @@ pub fn create_main_window() -> Ref<Window> {
             move || window.close(),
             std::time::Duration::from_millis(ms),
             ferroui::base::threading::DispatcherPriority::NORMAL,
-        );
+        ).detach();
     }
     window
 }
