@@ -170,13 +170,15 @@ impl MainPage {
                     this.navigate(page);
                 }
             }
-        });
+        })
+        .detach();
         let weak_nav = nav.downgrade();
         nav.item_invoked(move |_| {
             if let Some(nav) = weak_nav.upgrade() {
                 nav.set_is_pane_open(false);
             }
-        });
+        })
+        .detach();
         this.navigate(Page::Calculator(Mode::Standard));
         Ok(this)
     }

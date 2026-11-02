@@ -13,11 +13,13 @@ impl MainPage {
                 today.day() as i32,
             )));
             let weak = Rc::downgrade(self);
-            picker.selected_date_changed(move |_| {
-                if let Some(this) = weak.upgrade() {
-                    this.refresh();
-                }
-            });
+            picker
+                .selected_date_changed(move |_| {
+                    if let Some(this) = weak.upgrade() {
+                        this.refresh();
+                    }
+                })
+                .detach();
         }
         for name in ["DateCalculationOption", "AddSubtract"] {
             let weak = Rc::downgrade(self);
