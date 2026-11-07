@@ -36,10 +36,8 @@ impl ApplicationImpl for App {
         );
         ferroui::base::media::FontManager::current().add_font_collection(Rc::new(
             ferroui::base::media::fonts::EmbeddedFontCollection::new(
-                ferroui::base::utilities::Uri::absolute("fonts:Calculator")
-                    .expect("font collection URI"),
-                ferroui::base::utilities::Uri::absolute("ferres://FerroCalc/Assets")
-                    .expect("asset URI"),
+                url::Url::parse("fonts:Calculator").expect("font collection URI"),
+                url::Url::parse("ferres://FerroCalc/Assets").expect("asset URI"),
             ),
         ));
         let resources: Ref<ResourceDictionary> =
