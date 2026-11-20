@@ -2,7 +2,7 @@
 
 An initial native FerroUI port of [Microsoft Calculator](https://github.com/microsoft/calculator). **The original C++ CalcManager, CEngine and Ratpack sources are compiled unchanged.** Rust supplies platform adapters and view code-behind; FerroUI loads the calculator's adapted XAML. It runs natively on the desktop and in the browser, where the original engine is compiled to WebAssembly with the rest of the application.
 
-**Try it in the browser:** https://ferroui.github.io/calculator/
+**Try it in the browser:** https://ferroui.com/calculator/
 
 <p>
   <img src="docs/images/standard-light.png" width="280" alt="The Standard calculator in the light theme">
